@@ -22,6 +22,10 @@ libraryDependencies ++= Seq(
 
 // Slick ORM
 libraryDependencies ++= Seq(
-    "com.typesafe.slick" %% "slick-extensions" % "3.3.0",
-    "com.h2database" % "h2" % "1.4.199"
+    "com.typesafe.slick" %% "slick" % "3.3.0",
+    "com.h2database" % "h2" % "1.4.199",
+    "com.typesafe.slick" %% "slick-codegen" % "3.3.0",
+    "com.microsoft.sqlserver" % "mssql-jdbc" % "7.2.1.jre8"
 )
+
+libraryDependencies += "net.sourceforge.jtds" % "jtds" % "1.3.1"

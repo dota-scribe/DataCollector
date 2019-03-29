@@ -4,7 +4,7 @@
 		module="datacollector_2.12"
 		revision="0.1"
 		status="integration"
-		publication="20190325184618"
+		publication="20190327112550"
 	>
 		<description>
 		DataCollector
@@ -38,7 +38,10 @@
 		<dependency org="io.circe" name="circe-core_2.12" rev="0.10.0" conf="compile->default(compile)"/>
 		<dependency org="io.circe" name="circe-generic_2.12" rev="0.10.0" conf="compile->default(compile)"/>
 		<dependency org="io.circe" name="circe-parser_2.12" rev="0.10.0" conf="compile->default(compile)"/>
-		<dependency org="com.typesafe.slick" name="slick-extensions_2.12" rev="3.3.0" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.slick" name="slick_2.12" rev="3.3.0" conf="compile->default(compile)"/>
 		<dependency org="com.h2database" name="h2" rev="1.4.199" conf="compile->default(compile)"/>
+		<dependency org="com.typesafe.slick" name="slick-codegen_2.12" rev="3.3.0" conf="compile->default(compile)"/>
+		<dependency org="com.microsoft.sqlserver" name="mssql-jdbc" rev="7.2.1.jre8" conf="compile->default(compile)"/>
+		<dependency org="net.sourceforge.jtds" name="jtds" rev="1.3.1" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

@@ -1,6 +1,6 @@
 package Infrastructure.Adapter.DotaScribeSql.Table
 
-import Core.Main.suppliers
+//import Core.Main.suppliers
 import slick.jdbc.H2Profile.api._
 
 class Coffees(tag: Tag) extends Table[(String, Int, Double, Int, Int)](tag, "COFFEES") {
@@ -11,5 +11,5 @@ class Coffees(tag: Tag) extends Table[(String, Int, Double, Int, Int)](tag, "COF
     def total = column[Int]("TOTAL")
     def * = (name, supID, price, sales, total)
     // A reified foreign key relation that can be navigated to create a join
-    def supplier = foreignKey("SUP_FK", supID, suppliers)(_.id)
+//    def supplier = foreignKey("SUP_FK", supID, suppliers)(_.id)
 }
