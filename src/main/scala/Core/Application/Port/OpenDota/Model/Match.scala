@@ -6,7 +6,7 @@ case class Match (
     barracks_status_radiant: Int,
     chat: List[Chat],
     cluster: Int,
-    cosmetics: Map[String, Int],
+    cosmetics: Map[String, Int], // TODO
     dire_score: Int,
     dire_team_id: Int,
     draft_timings: List[DraftTiming],
@@ -19,8 +19,8 @@ case class Match (
     lobby_type: Int,
     match_seq_num: Long,
     negative_votes: Int,
-//    objectives: List[Objective],
-    picks_bans: List[PickBans],
+//    objectives: List[Objective], // TODO
+    picks_bans: List[PickBan],
     positive_votes: Int,
     radiant_gold_adv: List[Int],
     radiant_score: Int,
@@ -29,7 +29,7 @@ case class Match (
     radiant_xp_adv: List[Int],
     skill: Option[Int],
     start_time: Int,
-    teamfights: List[TeamFights],
+    teamfights: List[TeamFights], // TODO
     tower_status_dire: Int,
     tower_status_radiant: Int,
     version: Int,
@@ -39,7 +39,7 @@ case class Match (
     league: League,
     radiant_team: Team,
     dire_team: Team,
-//    players: String,
+    players: List[Player], // TODO
     patch: Int,
     region: Int,
 //    all_word_counts: Map[String, Int],

@@ -11,7 +11,7 @@ trait ProplayerTable {
   // NOTE: GetResult mappers for plain SQL are only generated for tables where Slick knows how to map the types of all columns.
   import slick.jdbc.{GetResult => GR}
   /** Entity class storing rows of table Proplayer
-   *  @param accountId Database column account_id SqlType(int)
+   *  @param accountId Database column account_id SqlType(int), PrimaryKey
    *  @param steamid Database column steamid SqlType(varchar), Length(255,true)
    *  @param avatar Database column avatar SqlType(varchar), Length(255,true)
    *  @param avatarmedium Database column avatarmedium SqlType(varchar), Length(255,true)
@@ -46,8 +46,8 @@ trait ProplayerTable {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = (Rep.Some(accountId) :: Rep.Some(steamid) :: Rep.Some(avatar) :: Rep.Some(avatarmedium) :: Rep.Some(avatarfull) :: Rep.Some(profileurl) :: Rep.Some(personaname) :: lastLogin :: fullHistoryTime :: Rep.Some(cheese) :: fhUnavailable :: loccountrycode :: Rep.Some(lastMatchTime) :: plus :: Rep.Some(name) :: Rep.Some(countryCode) :: Rep.Some(fantasyRole) :: Rep.Some(teamId) :: teamName :: teamTag :: Rep.Some(isLocked) :: Rep.Some(isPro) :: lockedUntil :: HNil).shaped.<>(r => ProplayerRow(r(0).asInstanceOf[Option[Int]].get, r(1).asInstanceOf[Option[String]].get, r(2).asInstanceOf[Option[String]].get, r(3).asInstanceOf[Option[String]].get, r(4).asInstanceOf[Option[String]].get, r(5).asInstanceOf[Option[String]].get, r(6).asInstanceOf[Option[String]].get, r(7).asInstanceOf[Option[String]], r(8).asInstanceOf[Option[String]], r(9).asInstanceOf[Option[Int]].get, r(10).asInstanceOf[Option[Boolean]], r(11).asInstanceOf[Option[String]], r(12).asInstanceOf[Option[String]].get, r(13).asInstanceOf[Option[Boolean]], r(14).asInstanceOf[Option[String]].get, r(15).asInstanceOf[Option[String]].get, r(16).asInstanceOf[Option[Int]].get, r(17).asInstanceOf[Option[Int]].get, r(18).asInstanceOf[Option[String]], r(19).asInstanceOf[Option[String]], r(20).asInstanceOf[Option[Boolean]].get, r(21).asInstanceOf[Option[Boolean]].get, r(22).asInstanceOf[Option[String]]), (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column account_id SqlType(int) */
-    val accountId: Rep[Int] = column[Int]("account_id")
+    /** Database column account_id SqlType(int), PrimaryKey */
+    val accountId: Rep[Int] = column[Int]("account_id", O.PrimaryKey)
     /** Database column steamid SqlType(varchar), Length(255,true) */
     val steamid: Rep[String] = column[String]("steamid", O.Length(255,varying=true))
     /** Database column avatar SqlType(varchar), Length(255,true) */

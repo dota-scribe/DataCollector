@@ -1,1 +1,0 @@
-scalac -classpath C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\classes -bootclasspath C:\Users\rnel6\.ivy2\cache\org.scala-lang\scala-library\jars\scala-library-2.12.8.jar C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\src\main\scala\Application\Main.scala

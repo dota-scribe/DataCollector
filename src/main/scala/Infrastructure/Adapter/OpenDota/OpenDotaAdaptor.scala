@@ -54,21 +54,19 @@ class OpenDotaAdaptor extends OpenDotaPort {
         return decodeResult.getOrElse({throw new Exception("Error decoding ProMatch JSON Response.")})
     }
 
-    def GetMatch(matchId: Long) : List[Match] = {
+    def GetMatch(matchId: Long) : Match = {
 //        val response = Http("https://api.opendota.com/api/matches/" + matchId)
 //        .header("Content-Type", "application/json")
 //        .asString
 //        .throwError
 
-        val filename = "C:\\Users\\rnel6\\IdeaProjects\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
+        val filename = "C:\\Workspace\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
         val line = Source.fromFile(filename).mkString
 
         implicit val matchDecoder = deriveDecoder[Match]
 
         val decodeResult = parse(line).flatMap(_.as[Match])
 
-        return  List[Match]()
-
-//        return decodeResult.getOrElse({throw new Exception("Error decoding ProMatch JSON Response.")})
+        return decodeResult.getOrElse({throw new Exception("Error decoding Match JSON Response")})
     }
 }

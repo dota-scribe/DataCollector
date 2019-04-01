@@ -9,7 +9,7 @@ trait PromatchTable {
   // NOTE: GetResult mappers for plain SQL are only generated for tables where Slick knows how to map the types of all columns.
   import slick.jdbc.{GetResult => GR}
   /** Entity class storing rows of table Promatch
-   *  @param matchId Database column match_id SqlType(bigint)
+   *  @param matchId Database column match_id SqlType(bigint), PrimaryKey
    *  @param duration Database column duration SqlType(bigint)
    *  @param startTime Database column start_time SqlType(bigint)
    *  @param radiantTeamId Database column radiant_team_id SqlType(bigint)
@@ -35,8 +35,8 @@ trait PromatchTable {
     /** Maps whole row to an option. Useful for outer joins. */
     def ? = ((Rep.Some(matchId), Rep.Some(duration), Rep.Some(startTime), radiantTeamId, radiantName, direTeamId, direName, Rep.Some(leagueid), Rep.Some(leagueName), Rep.Some(seriesId), Rep.Some(seriesType), Rep.Some(radiantScore), Rep.Some(direScore), Rep.Some(radiantWin))).shaped.<>({r=>import r._; _1.map(_=> PromatchRow.tupled((_1.get, _2.get, _3.get, _4, _5, _6, _7, _8.get, _9.get, _10.get, _11.get, _12.get, _13.get, _14.get)))}, (_:Any) =>  throw new Exception("Inserting into ? projection not supported."))
 
-    /** Database column match_id SqlType(bigint) */
-    val matchId: Rep[Long] = column[Long]("match_id")
+    /** Database column match_id SqlType(bigint), PrimaryKey */
+    val matchId: Rep[Long] = column[Long]("match_id", O.PrimaryKey)
     /** Database column duration SqlType(bigint) */
     val duration: Rep[Long] = column[Long]("duration")
     /** Database column start_time SqlType(bigint) */

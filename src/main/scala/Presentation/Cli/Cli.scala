@@ -18,15 +18,15 @@ class Cli(cliPort: CliPort) {
         println("9: Regenerate DB Mappings")
         println("")
         print("> ")
-        cliPort.GetMatch(4595179473L)
-//        val selection = StdIn.readInt()
-//
-//        selection match {
-//            case 1 => cliPort.CollectProData()
-//            case 2 => cliPort.GetProMatches()
-//            case 3 => GetMatch()
-//            case 9 => cliPort.RegenerateDbMappings()
-//        }
+//        cliPort.GetMatch(4595179473L)
+        val selection = StdIn.readInt()
+
+        selection match {
+            case 1 => cliPort.CollectProData()
+            case 2 => cliPort.GetProMatches()
+            case 3 => GetMatch()
+            case 9 => cliPort.RegenerateDbMappings()
+        }
     }
 
     def GetMatch(): Unit = {

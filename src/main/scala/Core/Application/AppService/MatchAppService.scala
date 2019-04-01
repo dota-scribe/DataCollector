@@ -5,6 +5,7 @@ import Core.Application.Port.OpenDota.OpenDotaPort
 
 class MatchAppService(openDotaPort: OpenDotaPort, dotaScribeRepositoryPort: DotaScribeRepositoryPort) {
     def GetMatch(matchId: Long): Unit = {
-        val matches = openDotaPort.GetMatch(matchId)
+        val matchData = openDotaPort.GetMatch(matchId)
+        dotaScribeRepositoryPort.SaveMatch(matchData)
     }
 }
