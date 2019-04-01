@@ -697,22 +697,8 @@
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.8 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.8 {scala-tool=[default, optional(default)]}
 [debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.8 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.8 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.8 {scala-tool=[default, optional(default)], compile=[default(compile)]}
 [debug] sbt-chain: Checking cache for: dependency: net.sourceforge.jtds#jtds;1.3.1 {compile=[default(compile)]}
-[debug] sbt-chain-delegate: Checking cache for: dependency: net.sourceforge.jtds#jtds;1.3.1 {compile=[default(compile)]}
-[debug] 		tried C:\Users\RNEL\.ivy2\local\net.sourceforge.jtds\jtds\1.3.1\ivys\ivy.xml
-[debug] 	local: no ivy file found for net.sourceforge.jtds#jtds;1.3.1
-[debug] 		tried https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom
-[debug] 	public: found md file for net.sourceforge.jtds#jtds;1.3.1
-[debug] 		=> https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom (1.3.1)
-[debug] downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.pom
-[debug] 	[SUCCESSFUL ] net.sourceforge.jtds#jtds;1.3.1!jtds.pom(pom.original) (105ms)
-[debug] sbt-chain: Checking cache for: dependency: org.sonatype.oss#oss-parent;7 {}
-[debug] sbt-chain: module revision found in cache: org.sonatype.oss#oss-parent;7
-[debug] 		tried C:\Users\RNEL\.ivy2\local\net.sourceforge.jtds\jtds\1.3.1\jars\jtds.jar
-[debug] 		tried https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar
-[debug] 	found net.sourceforge.jtds#jtds;1.3.1 in public
+[debug] sbt-chain: module revision found in cache: net.sourceforge.jtds#jtds;1.3.1
+[debug] 	found net.sourceforge.jtds#jtds;1.3.1 in sbt-chain
 [debug] == resolving dependencies default#datacollector_2.12;0.1->net.sourceforge.jtds#jtds;1.3.1 [compile->runtime]
 [debug] == resolving dependencies default#datacollector_2.12;0.1->net.sourceforge.jtds#jtds;1.3.1 [compile->compile]
 [debug] == resolving dependencies default#datacollector_2.12;0.1->net.sourceforge.jtds#jtds;1.3.1 [compile->master]
@@ -4914,147 +4900,46 @@
 [debug] ignoring unhandled DependencyDescriptorMediator: class sbt.internal.librarymanagement.IvyScalaUtil$OverrideScalaMediator
 [debug] 	resolved ivy file produced in cache
 [debug] :: downloading artifacts ::
+[debug] 	[NOT REQUIRED] io.circe#circe-generic_2.12;0.10.0!circe-generic_2.12.jar
+[debug] 	[NOT REQUIRED] io.circe#circe-parser_2.12;0.10.0!circe-parser_2.12.jar
+[debug] 	[NOT REQUIRED] org.scalaj#scalaj-http_2.12;2.4.1!scalaj-http_2.12.jar
+[debug] 	[NOT REQUIRED] io.circe#circe-core_2.12;0.10.0!circe-core_2.12.jar
 [debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.12;1.1.0!scala-parser-combinators_2.12.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.12.8!scala-library.jar
-[debug] 	[NOT REQUIRED] org.scalaj#scalaj-http_2.12;2.4.1!scalaj-http_2.12.jar
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] 	[NOT REQUIRED] io.circe#circe-parser_2.12;0.10.0!circe-parser_2.12.jar
-[debug] 	[NOT REQUIRED] io.circe#circe-generic_2.12;0.10.0!circe-generic_2.12.jar
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] 	[NOT REQUIRED] io.circe#circe-core_2.12;0.10.0!circe-core_2.12.jar
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] no default ivy user dir defined: set to C:\Users\RNEL\.ivy2
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-public.xml
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] no default cache defined: set to C:\Users\RNEL\.ivy2\cache
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-shared.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-local.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-main-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] including url: jar:file:/C:/Users/RNEL/.sbt/boot/scala-2.12.7/org.scala-sbt/sbt/1.2.8/ivy-2.3.0-sbt-cb9cc189e9f3af519f9f102e6c5d446488ff6832.jar!/org/apache/ivy/core/settings/ivysettings-default-chain.xml
-[debug] settings loaded (44ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] settings loaded (46ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] settings loaded (46ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] settings loaded (49ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] settings loaded (50ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] settings loaded (49ms)
-[debug] 	default cache: C:\Users\RNEL\.ivy2\cache
-[debug] 	default resolver: default
-[debug] 	-- 5 resolvers:
-[debug] 	shared [file]
-[debug] 	default [chain] [local, main]
-[debug] 	public [ibiblio]
-[debug] 	main [chain] [shared, public]
-[debug] 	local [file]
-[debug] 	[NOT REQUIRED] com.typesafe.slick#slick-codegen_2.12;3.3.0!slick-codegen_2.12.jar
 [debug] 	[NOT REQUIRED] com.typesafe.slick#slick_2.12;3.3.0!slick_2.12.jar(bundle)
-[debug] 	[NOT REQUIRED] com.microsoft.sqlserver#mssql-jdbc;7.2.1.jre8!mssql-jdbc.jar
 [debug] 	[NOT REQUIRED] io.circe#circe-numbers_2.12;0.10.0!circe-numbers_2.12.jar
-[debug] 		tried https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar
+[debug] 	[NOT REQUIRED] com.microsoft.sqlserver#mssql-jdbc;7.2.1.jre8!mssql-jdbc.jar
+[debug] 	[NOT REQUIRED] com.typesafe.slick#slick-codegen_2.12;3.3.0!slick-codegen_2.12.jar
 [debug] 	[NOT REQUIRED] com.h2database#h2;1.4.199!h2.jar
+[debug] 	[NOT REQUIRED] net.sourceforge.jtds#jtds;1.3.1!jtds.jar
+[debug] 	[NOT REQUIRED] org.typelevel#cats-kernel_2.12;1.4.0!cats-kernel_2.12.jar
 [debug] 	[NOT REQUIRED] org.typelevel#cats-core_2.12;1.4.0!cats-core_2.12.jar
-[info] downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar
+[debug] 	[NOT REQUIRED] org.typelevel#cats-macros_2.12;1.4.0!cats-macros_2.12.jar
 [debug] 	[NOT REQUIRED] org.typelevel#machinist_2.12;0.6.5!machinist_2.12.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.8!scala-reflect.jar
-[debug] 	[NOT REQUIRED] org.typelevel#cats-kernel_2.12;1.4.0!cats-kernel_2.12.jar
 [debug] 	[NOT REQUIRED] com.chuusai#shapeless_2.12;2.3.3!shapeless_2.12.jar(bundle)
+[debug] 	[NOT REQUIRED] org.typelevel#macro-compat_2.12;1.1.1!macro-compat_2.12.jar
 [debug] 	[NOT REQUIRED] io.circe#circe-jawn_2.12;0.10.0!circe-jawn_2.12.jar
 [debug] 	[NOT REQUIRED] org.spire-math#jawn-parser_2.12;0.13.0!jawn-parser_2.12.jar
-[debug] 	[NOT REQUIRED] org.typelevel#macro-compat_2.12;1.1.1!macro-compat_2.12.jar
 [debug] 	[NOT REQUIRED] org.slf4j#slf4j-api;1.7.25!slf4j-api.jar
-[debug] 	[NOT REQUIRED] com.typesafe#config;1.3.2!config.jar(bundle)
-[debug] 	[NOT REQUIRED] org.reactivestreams#reactive-streams;1.0.2!reactive-streams.jar
 [debug] 	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.5!scalatest_2.12.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(bundle)
+[debug] 	[NOT REQUIRED] org.reactivestreams#reactive-streams;1.0.2!reactive-streams.jar
+[debug] 	[NOT REQUIRED] com.typesafe#config;1.3.2!config.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.8!scala-compiler.jar
 [debug] 	[NOT REQUIRED] jline#jline;2.14.6!jline.jar
-[debug] 	[NOT REQUIRED] org.typelevel#cats-macros_2.12;1.4.0!cats-macros_2.12.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/net/sourceforge/jtds/jtds/1.3.1/jtds-1.3.1.jar
-[info] 	[SUCCESSFUL ] net.sourceforge.jtds#jtds;1.3.1!jtds.jar (224ms)
-[debug] :: resolution report :: resolve 1561ms :: artifacts dl 292ms
-[debug] 	report for default#datacollector_2.12;0.1 compile produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-compile.xml
-[debug] 	report for default#datacollector_2.12;0.1 runtime produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-runtime.xml
-[debug] 	report for default#datacollector_2.12;0.1 test produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-test.xml
-[debug] 	report for default#datacollector_2.12;0.1 provided produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-provided.xml
-[debug] 	report for default#datacollector_2.12;0.1 optional produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-optional.xml
-[debug] 	report for default#datacollector_2.12;0.1 compile-internal produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-compile-internal.xml
-[debug] 	report for default#datacollector_2.12;0.1 runtime-internal produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-runtime-internal.xml
-[debug] 	report for default#datacollector_2.12;0.1 test-internal produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-test-internal.xml
-[debug] 	report for default#datacollector_2.12;0.1 plugin produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-plugin.xml
-[debug] 	report for default#datacollector_2.12;0.1 pom produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-pom.xml
-[debug] 	report for default#datacollector_2.12;0.1 scala-tool produced in C:\Workspace\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-scala-tool.xml
-[debug] 	resolve done (1561ms resolve - 292ms download)
+[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.8!scala-compiler.jar
+[debug] :: resolution report :: resolve 292ms :: artifacts dl 4ms
+[debug] 	report for default#datacollector_2.12;0.1 compile produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-compile.xml
+[debug] 	report for default#datacollector_2.12;0.1 runtime produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-runtime.xml
+[debug] 	report for default#datacollector_2.12;0.1 test produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-test.xml
+[debug] 	report for default#datacollector_2.12;0.1 provided produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-provided.xml
+[debug] 	report for default#datacollector_2.12;0.1 optional produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-optional.xml
+[debug] 	report for default#datacollector_2.12;0.1 compile-internal produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-compile-internal.xml
+[debug] 	report for default#datacollector_2.12;0.1 runtime-internal produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-runtime-internal.xml
+[debug] 	report for default#datacollector_2.12;0.1 test-internal produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-test-internal.xml
+[debug] 	report for default#datacollector_2.12;0.1 plugin produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-plugin.xml
+[debug] 	report for default#datacollector_2.12;0.1 pom produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-pom.xml
+[debug] 	report for default#datacollector_2.12;0.1 scala-tool produced in C:\Users\rnel6\IdeaProjects\DotaScribe\DataCollector\target\scala-2.12\resolution-cache\reports\default-datacollector_2.12-scala-tool.xml
+[debug] 	resolve done (292ms resolve - 4ms download)
 [info] Done updating.

@@ -1,12 +1,28 @@
 package Core.Application.CommandHandler
 
-import Core.Application.AppService.ProAppService
+import Core.Application.AppService.{DotaScribeDbService, MatchAppService, ProAppService}
 import Core.Application.Port.Cli.CliPort
 
-// TODO: Inject ProAppService
-class CliCommandHandler(proAppService: ProAppService) extends CliPort {
+class CliCommandHandler(proAppService: ProAppService, dotaScribeDbService: DotaScribeDbService, matchAppService: MatchAppService) extends CliPort {
     override def CollectProData(): Unit = {
         proAppService.GetProPlayers()
+        proAppService.GetProMatches()
         // Get Pro Matches...
+    }
+
+    override def RegenerateDbMappings(): Unit = {
+        dotaScribeDbService.RegenerateDbMappings()
+    }
+
+    override def GetProMatches(): Unit = {
+        proAppService.GetProMatches()
+    }
+
+    override def GetProPlayers(): Unit = {
+        proAppService.GetProPlayers()
+    }
+
+    override def GetMatch(matchId: Long): Unit = {
+        matchAppService.GetMatch(matchId)
     }
 }

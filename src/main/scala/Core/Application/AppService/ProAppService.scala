@@ -8,4 +8,14 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
         val proPlayers = openDotaPort.GetProPlayers()
         repository.SaveProPlayers(proPlayers)
     }
+
+    def GetProMatches(): Unit = {
+        val proMatches = openDotaPort.GetProMatches()
+        repository.SaveProMatches(proMatches)
+    }
+
+    def GetProMatches(lessThanMatchId: String): Unit = {
+        val proMatches = openDotaPort.GetProMatches(lessThanMatchId)
+        repository.SaveProMatches(proMatches)
+    }
 }
