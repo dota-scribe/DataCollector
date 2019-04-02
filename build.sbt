@@ -29,3 +29,10 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "net.sourceforge.jtds" % "jtds" % "1.3.1"
+
+
+// Quill
+libraryDependencies ++= Seq(
+    "com.microsoft.sqlserver" % "mssql-jdbc" % "6.1.7.jre8-preview",
+    "io.getquill" %% "quill-jdbc" % "3.1.0"
+)

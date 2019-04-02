@@ -4,6 +4,7 @@ import Core.Application.AppService.{DotaScribeDbService, MatchAppService, ProApp
 import Core.Application.CommandHandler.CliCommandHandler
 import Infrastructure.Adapter.OpenDota.MsSql.DotaScribeSql
 import Infrastructure.Adapter.OpenDota.OpenDotaAdaptor
+import Infrastructure.Adapter.QuillDotaScribeSql.QuillDotaScribeSql
 import Presentation.Cli.Cli
 import com.typesafe.config.ConfigFactory
 import slick.jdbc.SQLServerProfile.api._
@@ -23,7 +24,8 @@ object Main extends App {
     val dbInstance = Database.forURL(url, user, password, null, jdbcDriver)
 
     val openDotaAdapter = new OpenDotaAdaptor()
-    val dotaScribeSql = new DotaScribeSql(dbInstance)
+    //    val dotaScribeSql = new DotaScribeSql(dbInstance)
+    val dotaScribeSql = new QuillDotaScribeSql()
     val dotaScribeDbService = new DotaScribeDbService(dotaScribeSql)
     val matchAppService = new MatchAppService(openDotaAdapter, dotaScribeSql)
     val proAppService = new ProAppService(openDotaAdapter, dotaScribeSql)

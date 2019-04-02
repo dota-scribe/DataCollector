@@ -167,7 +167,9 @@ class DotaScribeSql(db: SQLServerProfile.backend.Database) extends DotaScribeRep
             fight.deaths
         ))).flatMap(teamFightIds => {
             var teamFightKey = -1
-            teamFightPlayerTable returning teamFightPlayerTable.map(_.teamfightPlayerId) ++= teamFightIds.flatMap(teamFightId => {
+            val returningTeamFightPlayer = teamFightPlayerTable returning teamFightPlayerTable.map(_.teamfightPlayerId)
+
+            (returningTeamFightPlayer ++= teamFightIds.flatMap(teamFightId => {
                 teamFightKey += 1
                 matchData.teamfights(teamFightKey).players.map(player => Tables.TeamfightplayerRow(
                     0,
@@ -181,6 +183,32 @@ class DotaScribeSql(db: SQLServerProfile.backend.Database) extends DotaScribeRep
                     player.xp_start,
                     player.xp_end
                 ))
+            })).map(playerIds => {
+
+                TableQuery[Tables.Teamfightdeathposition] += Tables.TeamfightdeathpositionRow(
+                    1, 1, 1, 1
+                )
+
+
+//                teamFightKey = -1
+//                val test = TableQuery[Tables.Teamfightdeathposition] ++= teamFightIds.flatMap(teamFightId => {
+//                    teamFightKey += 1
+//                    var teamPlayerKey = -1
+//                    val fight = matchData.teamfights(teamFightKey)
+//
+//                    playerIds.flatMap(playerId => {
+//                        teamPlayerKey += 1
+//                        val player = matchData.teamfights(teamFightKey).players(teamPlayerKey)
+//
+//                        player.deaths_pos.map(death => {
+//                            Tables.TeamfightdeathpositionRow(
+//                                playerId, 1, 1, 1
+//                            )
+//                        })
+//                    })
+//                })
+//
+//                test
             })
         })
 
