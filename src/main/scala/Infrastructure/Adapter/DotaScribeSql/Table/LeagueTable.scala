@@ -40,8 +40,8 @@ trait LeagueTable {
     /** Database column name SqlType(varchar), Length(255,true) */
     val name: Rep[String] = column[String]("name", O.Length(255,varying=true))
 
-    /** Foreign key referencing Match (database name FK__League__match_id__3B95D2F1) */
-    lazy val matchFk = foreignKey("FK__League__match_id__3B95D2F1", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__League__match_id__42A2C333) */
+    lazy val matchFk = foreignKey("FK__League__match_id__42A2C333", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table League */
   lazy val League = new TableQuery(tag => new League(tag))

@@ -39,6 +39,8 @@ DROP TABLE IF EXISTS RadiantXpAdvantage
 DROP TABLE IF EXISTS RadiantTeam
 DROP TABLE IF EXISTS DireTeam
 DROP TABLE IF EXISTS League
+DROP TABLE IF EXISTS TeamFightPlayer
+DROP TABLE IF EXISTS TeamFight
 DROP TABLE IF EXISTS Match
 
 CREATE TABLE ProPlayer (
@@ -92,12 +94,9 @@ CREATE TABLE Match (
 	match_id BIGINT NOT NULL,
 	barracks_status_dire INT NOT NULL,
 	barracks_status_radiant INT NOT NULL,
-	--chat List[Chat] NOT NULL,
 	cluster INT NOT NULL,
-	--cosmetics Map[String, INT] NOT NULL,
 	dire_score INT NOT NULL,
 	dire_team_id INT NOT NULL,
-	--draft_timings List[DraftTiming] NOT NULL,
 	duration INT NOT NULL,
 	engine INT NOT NULL,
 	first_blood_time INT NOT NULL,
@@ -107,31 +106,19 @@ CREATE TABLE Match (
 	lobby_type INT NOT NULL,
 	match_seq_num BIGINT NOT NULL,
 	negative_votes INT NOT NULL,
-	--//    objectives List[Objective] NOT NULL,
-	--picks_bans List[PickBans] NOT NULL,
 	positive_votes INT NOT NULL,
-	--radiant_gold_adv List[INT] NOT NULL,
 	radiant_score INT NOT NULL,
 	radiant_team_id INT NOT NULL,
-	--radiant_win Boolean NOT NULL,
-	--radiant_xp_adv List[INT] NOT NULL,
 	skill INT,
 	start_time INT NOT NULL,
-	--teamfights List[TeamFights] NOT NULL,
 	tower_status_dire INT NOT NULL,
 	tower_status_radiant INT NOT NULL,
 	version INT NOT NULL,
 	replay_salt INT NOT NULL,
 	series_id INT NOT NULL,
 	series_type INT NOT NULL,
-	--league League NOT NULL,
-	--radiant_team Team NOT NULL,
-	--dire_team Team NOT NULL,
-	--players List[Player] NOT NULL,
 	patch INT NOT NULL,
 	region INT NOT NULL,
-	--//    all_word_counts Map[String, INT] NOT NULL,
-	--//    my_word_counts Map[String, INT] NOT NULL,
 	comeback INT NOT NULL,
 	stomp INT NOT NULL,
 	replay_url VARCHAR(255) NOT NULL,
@@ -214,4 +201,32 @@ CREATE TABLE League (
 	name VARCHAR(255) NOT NULL,
 
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+)
+
+CREATE TABLE TeamFight (
+	teamfight_id BIGINT NOT NULL IDENTITY(1,1),
+	match_id BIGINT NOT NULL,
+	start INT NOT NULL,
+	[end] INT NOT NULL,
+	last_death INT NOT NULL,
+	deaths INT NOT NULL,
+
+	PRIMARY KEY (teamfight_id),
+	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+)
+
+CREATE TABLE TeamFightPlayer (
+	teamfight_player_id BIGINT NOT NULL IDENTITY(1,1),
+	teamfight_id BIGINT NOT NULL,
+	deaths INT NOT NULL,
+	buybacks INT NOT NULL,
+	damage INT NOT NULL,
+	healing INT NOT NULL,
+	gold_delta INT NOT NULL,
+	xp_delta INT NOT NULL,
+	xp_start INT NOT NULL,
+	xp_end INT NOT NULL,
+
+	PRIMARY KEY (teamfight_player_id),
+	FOREIGN KEY (teamfight_id) REFERENCES TeamFight(teamfight_id)
 )

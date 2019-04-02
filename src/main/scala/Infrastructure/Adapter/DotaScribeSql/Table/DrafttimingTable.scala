@@ -46,8 +46,8 @@ trait DrafttimingTable {
     /** Database column total_time_taken SqlType(int) */
     val totalTimeTaken: Rep[Int] = column[Int]("total_time_taken")
 
-    /** Foreign key referencing Match (database name FK__DraftTimi__total__30242045) */
-    lazy val matchFk = foreignKey("FK__DraftTimi__total__30242045", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__DraftTimi__total__37311087) */
+    lazy val matchFk = foreignKey("FK__DraftTimi__total__37311087", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Drafttiming */
   lazy val Drafttiming = new TableQuery(tag => new Drafttiming(tag))

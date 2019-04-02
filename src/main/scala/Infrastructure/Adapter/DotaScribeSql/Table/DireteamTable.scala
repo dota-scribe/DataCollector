@@ -37,8 +37,8 @@ trait DireteamTable {
     /** Database column logo_url SqlType(varchar), Length(255,true) */
     val logoUrl: Rep[String] = column[String]("logo_url", O.Length(255,varying=true))
 
-    /** Foreign key referencing Match (database name FK__DireTeam__logo_u__39AD8A7F) */
-    lazy val matchFk = foreignKey("FK__DireTeam__logo_u__39AD8A7F", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__DireTeam__logo_u__40BA7AC1) */
+    lazy val matchFk = foreignKey("FK__DireTeam__logo_u__40BA7AC1", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Direteam */
   lazy val Direteam = new TableQuery(tag => new Direteam(tag))

@@ -28,8 +28,8 @@ trait RadiantgoldadvantageTable {
     /** Database column gold_advantage SqlType(int) */
     val goldAdvantage: Rep[Int] = column[Int]("gold_advantage")
 
-    /** Foreign key referencing Match (database name FK__RadiantGo__match__33F4B129) */
-    lazy val matchFk = foreignKey("FK__RadiantGo__match__33F4B129", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__RadiantGo__match__3B01A16B) */
+    lazy val matchFk = foreignKey("FK__RadiantGo__match__3B01A16B", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Radiantgoldadvantage */
   lazy val Radiantgoldadvantage = new TableQuery(tag => new Radiantgoldadvantage(tag))

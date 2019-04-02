@@ -37,8 +37,8 @@ trait RadiantteamTable {
     /** Database column logo_url SqlType(varchar), Length(255,true) */
     val logoUrl: Rep[String] = column[String]("logo_url", O.Length(255,varying=true))
 
-    /** Foreign key referencing Match (database name FK__RadiantTe__logo___37C5420D) */
-    lazy val matchFk = foreignKey("FK__RadiantTe__logo___37C5420D", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__RadiantTe__logo___3ED2324F) */
+    lazy val matchFk = foreignKey("FK__RadiantTe__logo___3ED2324F", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Radiantteam */
   lazy val Radiantteam = new TableQuery(tag => new Radiantteam(tag))

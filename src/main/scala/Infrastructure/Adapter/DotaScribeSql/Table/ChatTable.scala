@@ -40,8 +40,8 @@ trait ChatTable {
     /** Database column player_slot SqlType(int) */
     val playerSlot: Rep[Int] = column[Int]("player_slot")
 
-    /** Foreign key referencing Match (database name FK__Chat__match_id__2E3BD7D3) */
-    lazy val matchFk = foreignKey("FK__Chat__match_id__2E3BD7D3", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__Chat__match_id__3548C815) */
+    lazy val matchFk = foreignKey("FK__Chat__match_id__3548C815", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Chat */
   lazy val Chat = new TableQuery(tag => new Chat(tag))

@@ -40,8 +40,8 @@ trait PickbanTable {
     /** Database column ord SqlType(int) */
     val ord: Rep[Int] = column[Int]("ord")
 
-    /** Foreign key referencing Match (database name FK__PickBan__match_i__320C68B7) */
-    lazy val matchFk = foreignKey("FK__PickBan__match_i__320C68B7", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
+    /** Foreign key referencing Match (database name FK__PickBan__match_i__391958F9) */
+    lazy val matchFk = foreignKey("FK__PickBan__match_i__391958F9", matchId, Match)(r => r.matchId, onUpdate=ForeignKeyAction.Restrict, onDelete=ForeignKeyAction.Restrict)
   }
   /** Collection-like TableQuery object for table Pickban */
   lazy val Pickban = new TableQuery(tag => new Pickban(tag))
