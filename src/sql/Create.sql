@@ -156,10 +156,10 @@ CREATE TABLE PickBan (
 	is_pick BIT NOT NULL,
 	hero_id INT NOT NULL,
 	team INT NOT NULL,
-	[order] INT NOT NULL,
+	"order" INT NOT NULL,
 	ord INT NOT NULL,
 
-	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+	--FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
 CREATE TABLE RadiantGoldAdvantage (
@@ -201,7 +201,7 @@ CREATE TABLE League (
 	tier VARCHAR(255) NOT NULL,
 	name VARCHAR(255) NOT NULL,
 
-	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+	--FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
 CREATE TABLE TeamFight (

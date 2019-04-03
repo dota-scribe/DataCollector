@@ -1,6 +1,6 @@
 package Core.Application.Port.OpenDota.Model
 
-case class League(
+case class LeagueDao(
                  match_id: Option[Long],
     leagueid: Int,
     ticket: Option[String],
