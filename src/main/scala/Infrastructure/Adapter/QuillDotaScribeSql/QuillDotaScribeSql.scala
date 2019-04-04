@@ -81,57 +81,57 @@ class QuillDotaScribeSql extends DotaScribeRepositoryPort with DaoSchema {
         })
     }
 
-        private def ProcessTeamFightPlayers(teamFightId: Long, players: List[TeamFightPlayer]): Unit = {
-            players.foreach(player => {
-                val teamFightPlayerId = InsertTeamFightPlayer(teamFightId, player)
-                InsertTeamFightDeathPosition(teamFightPlayerId, player.deaths_pos)
-            })
-        }
+    private def ProcessTeamFightPlayers(teamFightId: Long, players: List[TeamFightPlayer]): Unit = {
+        players.foreach(player => {
+            val teamFightPlayerId = InsertTeamFightPlayer(teamFightId, player)
+            InsertTeamFightDeathPosition(teamFightPlayerId, player.deaths_pos)
+        })
+    }
 
-        private def InsertTeamFightDeathPosition(teamFightPlayerId: Long, deathPos: Map[Int, Map[Int, Int]]): Unit = {
-            var hasDeath: Boolean = false
-            var x : Int = 0
-            var y : Int = 0
-            var z : Int = 0
+    private def InsertTeamFightDeathPosition(teamFightPlayerId: Long, deathPos: Map[Int, Map[Int, Int]]): Unit = {
+        var hasDeath: Boolean = false
+        var x: Int = 0
+        var y: Int = 0
+        var z: Int = 0
 
-            deathPos.foreach{
-                case(key, value) => {
-                    hasDeath = true;
-                    x = key
-                    value.foreach{
-                        case(key, value) => {
-                            y = key
-                            z = value
-                        }
+        deathPos.foreach {
+            case (key, value) => {
+                hasDeath = true;
+                x = key
+                value.foreach {
+                    case (key, value) => {
+                        y = key
+                        z = value
                     }
-                };
-            }
-
-            if (hasDeath) {
-                val teamFightPlayerDeathPositionInsert = quote(TeamFightPlayerDeathPositionSchema.insert(lift(TeamFightPlayerDeathPositionDao(
-                    teamFightPlayerId, x, y, z
-                ))))
-
-                Context.run(teamFightPlayerDeathPositionInsert)
-            }
+                }
+            };
         }
 
-        private def InsertTeamFightPlayer(teamFightId: Long, player: TeamFightPlayer): Long = {
-            val teamFightPlayerInsert = quote(TeamFightPlayerSchema.insert(lift(TeamFightPlayerDao(
-                0,
-                teamFightId,
-                player.deaths,
-                player.buybacks,
-                player.damage,
-                player.healing,
-                player.gold_delta,
-                player.xp_delta,
-                player.xp_start,
-                player.xp_end
-            ))).returning(_.teamfight_player_id))
+        if (hasDeath) {
+            val teamFightPlayerDeathPositionInsert = quote(TeamFightPlayerDeathPositionSchema.insert(lift(TeamFightPlayerDeathPositionDao(
+                teamFightPlayerId, x, y, z
+            ))))
 
-            Context.run(teamFightPlayerInsert)
+            Context.run(teamFightPlayerDeathPositionInsert)
         }
+    }
+
+    private def InsertTeamFightPlayer(teamFightId: Long, player: TeamFightPlayer): Long = {
+        val teamFightPlayerInsert = quote(TeamFightPlayerSchema.insert(lift(TeamFightPlayerDao(
+            0,
+            teamFightId,
+            player.deaths,
+            player.buybacks,
+            player.damage,
+            player.healing,
+            player.gold_delta,
+            player.xp_delta,
+            player.xp_start,
+            player.xp_end
+        ))).returning(_.teamfight_player_id))
+
+        Context.run(teamFightPlayerInsert)
+    }
 
     private def InsertTeamFight(matchId: Long, teamFight: TeamFights): Long = {
 

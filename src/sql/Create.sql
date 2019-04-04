@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS RadiantXpAdvantage
 DROP TABLE IF EXISTS RadiantTeam
 DROP TABLE IF EXISTS DireTeam
 DROP TABLE IF EXISTS League
+DROP TABLE IF EXISTS TeamFightPlayerAbilityUse
 DROP TABLE IF EXISTS TeamFightPlayerDeathPosition
 DROP TABLE IF EXISTS TeamFightPlayer
 DROP TABLE IF EXISTS TeamFight
@@ -237,6 +238,13 @@ CREATE TABLE TeamFightPlayerDeathPosition (
 	x INT NOT NULL,
 	y INT NOT NULL,
 	z INT NOT NULL
+
+	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
+)
+
+CREATE TABLE TeamFightPlayerAbilityUse (
+	teamfight_player_id BIGINT NOT NULL,
+	ability INT NOT NULL,
 
 	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
 )
