@@ -244,7 +244,8 @@ CREATE TABLE TeamFightPlayerDeathPosition (
 
 CREATE TABLE TeamFightPlayerAbilityUse (
 	teamfight_player_id BIGINT NOT NULL,
-	ability INT NOT NULL,
+	ability VARCHAR(255) NOT NULL,
+	count INT NOT NULL,
 
 	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
 )

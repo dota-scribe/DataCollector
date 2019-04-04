@@ -85,7 +85,50 @@ class QuillDotaScribeSql extends DotaScribeRepositoryPort with DaoSchema {
         players.foreach(player => {
             val teamFightPlayerId = InsertTeamFightPlayer(teamFightId, player)
             InsertTeamFightDeathPosition(teamFightPlayerId, player.deaths_pos)
+            InsertAbilityUse(teamFightPlayerId, player.ability_uses)
         })
+    }
+
+    private def InsertAbilityUse(teamFightPlayerId: Long, abilityUse: Map[String, Int]): Unit = {
+        abilityUse.foreach(ability => {
+            val doa = TeamFightPlayerAbilityUseDoa(
+                teamFightPlayerId,
+                ability._1,
+                ability._2
+            )
+
+            val abilityUseInsert = quote(TeamFightPlayerAbilityUseSchema.insert(lift(TeamFightPlayerAbilityUseDoa(
+                teamFightPlayerId,
+                ability._1,
+                ability._2
+            ))))
+
+            Context.run(abilityUseInsert)
+        })
+
+//        val teamFightPlayerDeathPositionInsert = quote(TeamFightPlayerDeathPositionSchema.insert(lift(TeamFightPlayerDeathPositionDao(
+//            teamFightPlayerId, x, y, z
+//        ))))
+//
+//        Context.run(teamFightPlayerDeathPositionInsert)
+//
+//        val abilityUseInsert = quote {
+//            liftQuery(abilityUse).foreach(ability => TeamFightPlayerAbilityUseSchema.insert(TeamFightPlayerAbilityUseDoa(
+//                lift(teamFightPlayerId),
+//                lift(ability._1.toString),
+//                lift(ability._2.toInt)
+//            )))
+//        }
+
+        //
+        //            val xpAdvantageInsert = quote {
+        //                liftQuery(matchData.radiant_xp_adv).foreach(adv => RadiantXpAdvantageSchema.insert(RadiantXpAdvantageDao(
+        //                    lift(matchData.match_id),
+        //                    adv
+        //                )))
+        //        }
+
+//        Context.run(abilityUseInsert)
     }
 
     private def InsertTeamFightDeathPosition(teamFightPlayerId: Long, deathPos: Map[Int, Map[Int, Int]]): Unit = {

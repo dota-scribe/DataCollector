@@ -54,4 +54,8 @@ trait DaoSchema {
     val TeamFightPlayerDeathPositionSchema = quote {
         querySchema[TeamFightPlayerDeathPositionDao]("TeamFightPlayerDeathPosition")
     }
+
+    val TeamFightPlayerAbilityUseSchema = quote {
+        querySchema[TeamFightPlayerAbilityUseDoa]("TeamFightPlayerAbilityUse")
+    }
 }
