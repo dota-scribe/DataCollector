@@ -1,6 +1,7 @@
 package Core.Application.Port.OpenDota.Model
 
 case class DraftTimingDao(
+    match_id: Long,
     order: Int,
     pick: Boolean,
     active_team: Int,

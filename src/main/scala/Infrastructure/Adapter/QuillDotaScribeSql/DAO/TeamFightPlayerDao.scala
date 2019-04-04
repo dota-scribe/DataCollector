@@ -1,11 +1,8 @@
 package Core.Application.Port.OpenDota.Model
 
 case class TeamFightPlayerDao(
-    deaths_pos: Map[Int, Map[Int, Int]],
-    ability_uses: Map[String, Int],
-    ability_targets: Map[String, Int],
-    item_uses: Map[String, Int],
-    killed: Map[String, Int],
+    teamfight_player_id: Long,
+    teamfight_id: Long,
     deaths: Int,
     buybacks: Int,
     damage: Int,

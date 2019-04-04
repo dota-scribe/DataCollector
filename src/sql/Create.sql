@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS RadiantXpAdvantage
 DROP TABLE IF EXISTS RadiantTeam
 DROP TABLE IF EXISTS DireTeam
 DROP TABLE IF EXISTS League
-DROP TABLE IF EXISTS TeamFightDeathPosition
+DROP TABLE IF EXISTS TeamFightPlayerDeathPosition
 DROP TABLE IF EXISTS TeamFightPlayer
 DROP TABLE IF EXISTS TeamFight
 DROP TABLE IF EXISTS Match
@@ -159,7 +159,7 @@ CREATE TABLE PickBan (
 	"order" INT NOT NULL,
 	ord INT NOT NULL,
 
-	--FOREIGN KEY (match_id) REFERENCES Match(match_id)
+	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
 CREATE TABLE RadiantGoldAdvantage (
@@ -170,7 +170,7 @@ CREATE TABLE RadiantGoldAdvantage (
 
 CREATE TABLE RadiantXpAdvantage (
 	match_id BIGINT NOT NULL,
-	gold_advantage INT NOT NULL,
+	xp_advantage INT NOT NULL,
 
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
@@ -201,7 +201,7 @@ CREATE TABLE League (
 	tier VARCHAR(255) NOT NULL,
 	name VARCHAR(255) NOT NULL,
 
-	--FOREIGN KEY (match_id) REFERENCES Match(match_id)
+	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
 CREATE TABLE TeamFight (
@@ -232,7 +232,7 @@ CREATE TABLE TeamFightPlayer (
 	FOREIGN KEY (teamfight_id) REFERENCES TeamFight(teamfight_id)
 )
 
-CREATE TABLE TeamFightDeathPosition (
+CREATE TABLE TeamFightPlayerDeathPosition (
 	teamfight_player_id BIGINT NOT NULL,
 	x INT NOT NULL,
 	y INT NOT NULL,
