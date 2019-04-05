@@ -7,7 +7,7 @@ class TeamFightHandler(context: PostgresContext) extends DaoSchema {
     override val Context: PostgresContext = context
     import Context._
 
-    def ProcessTeamFight(matchId: Long, teamfights: List[TeamFights]): Unit = {
+    def ProcessTeamFights(matchId: Long, teamfights: List[TeamFights]): Unit = {
         teamfights.foreach(fight => {
             val teamFightId = InsertTeamFight(matchId, fight)
             ProcessTeamFightPlayers(teamFightId, fight.players)

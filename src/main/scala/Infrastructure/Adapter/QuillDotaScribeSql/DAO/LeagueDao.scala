@@ -1,7 +1,7 @@
 package Core.Application.Port.OpenDota.Model
 
 case class LeagueDao(
-                 match_id: Option[Long],
+    match_id: Long,
     leagueid: Int,
     ticket: Option[String],
     banner: Option[String],

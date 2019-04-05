@@ -5,8 +5,8 @@ import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
 import Infrastructure.Adapter.QuillDotaScribeSql.Handler.{MatchHandler, TeamFightHandler}
 
-class QuillDotaScribeSql extends DotaScribeRepositoryPort with DaoSchema {
-    override val Context: PostgresContext = new PostgresContext()
+class QuillDotaScribeSql(context: PostgresContext) extends DotaScribeRepositoryPort with DaoSchema {
+    override val Context: PostgresContext = context
 
     import Context._
 
@@ -68,7 +68,7 @@ class QuillDotaScribeSql extends DotaScribeRepositoryPort with DaoSchema {
     override def SaveMatch(matchData: Match): Unit = {
         val matchId = new MatchHandler(Context).ProcessMatch(matchData)
 
-        new TeamFightHandler(Context).ProcessTeamFight(matchId, matchData.teamfights)
+        new TeamFightHandler(Context).ProcessTeamFights(matchId, matchData.teamfights)
     }
 
 

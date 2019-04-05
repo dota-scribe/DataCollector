@@ -1,7 +1,6 @@
 package Core.Application.Port.OpenDota.Model
 
-case class PlayerDao (
-    player_id: Long,
+case class MatchPlayer(
     match_id: Long,
     player_slot: Int,
     ability_targets: Map[String, Map[String, Int]],
@@ -16,6 +15,9 @@ case class PlayerDao (
     backpack_2: Int,
     buyback_log: List[BuyBackLog],
     camps_stacked: Int,
+
+    // connection_log,
+
     creeps_stacked: Int,
     damage: Map[String, Int],
     damage_inflictor: Map[String, Int],
@@ -31,6 +33,8 @@ case class PlayerDao (
     gold_reasons: Map[Int, Double],
     gold_spent: Int,
     gold_t: List[Int],
+
+    // End of by hand
     hero_damage: Int,
     hero_healing: Int,
     hero_id: Int,

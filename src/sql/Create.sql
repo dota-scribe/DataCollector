@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS RadiantXpAdvantage
 DROP TABLE IF EXISTS RadiantTeam
 DROP TABLE IF EXISTS DireTeam
 DROP TABLE IF EXISTS League
+DROP TABLE IF EXISTS Objective
 DROP TABLE IF EXISTS TeamFightPlayerAbilityUse
 DROP TABLE IF EXISTS TeamFightPlayerAbilityTarget
 DROP TABLE IF EXISTS TeamFightPlayerDeathPosition
@@ -46,6 +47,7 @@ DROP TABLE IF EXISTS TeamFightPlayerItemUse
 DROP TABLE IF EXISTS TeamFightPlayerKilled
 DROP TABLE IF EXISTS TeamFightPlayer
 DROP TABLE IF EXISTS TeamFight
+DROP TABLE IF EXISTS Player
 DROP TABLE IF EXISTS Match
 
 CREATE TABLE ProPlayer (
@@ -138,6 +140,19 @@ CREATE TABLE Chat (
 	[key] VARCHAR(255) NOT NULL,
 	slot Int NOT NULL,
 	player_slot Int NOT NULL,
+
+	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+)
+
+CREATE TABLE Objective (
+	match_id BIGINT NOT NULL,
+	time INT NOT NULL,
+	type VARCHAR(255) NOT NULL,
+	Unit VARCHAR(255),
+	slot INT,
+	[key] VARCHAR(255),
+	player_slot INT,
+	team INT,
 
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
@@ -276,4 +291,97 @@ CREATE TABLE TeamFightPlayerKilled (
 	count INT NOT NULL,
 
 	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
+)
+
+CREATE TABLE Player (
+	player_id BIGINT NOT NULL IDENTITY(1,1),
+    match_id BIGINT NOT NULL,
+    player_slot INT NOT NULL,
+    account_id BIGINT NOT NULL,
+    additional_units VARCHAR(255),
+    assists INT NOT NULL,
+    backpack_0 INT NOT NULL,
+    backpack_1 INT NOT NULL,
+    backpack_2 INT NOT NULL,
+    camps_stacked INT NOT NULL,
+    creeps_stacked INT NOT NULL,
+    deaths INT NOT NULL,
+    denies INT NOT NULL,
+    firstblood_claimed INT NOT NULL,
+    gold INT NOT NULL,
+    gold_per_min INT NOT NULL,
+    gold_spent INT NOT NULL,
+    hero_damage INT NOT NULL,
+    hero_healing INT NOT NULL,
+    hero_id INT NOT NULL,
+    item_0 INT NOT NULL,
+    item_1 INT NOT NULL,
+    item_2 INT NOT NULL,
+    item_3 INT NOT NULL,
+    item_4 INT NOT NULL,
+    item_5 INT NOT NULL,
+    kills INT NOT NULL,
+    last_hits INT NOT NULL,
+    leaver_status INT NOT NULL,
+    level INT NOT NULL,
+    obs_placed INT NOT NULL,
+    party_id INT NOT NULL,
+    party_size INT NOT NULL,
+    performance_others VARCHAR(255),
+    pings INT NOT NULL,
+    pred_vict BIT NOT NULL,
+    randomed BIT NOT NULL,
+    repicked BIT,
+    roshans_killed INT NOT NULL,
+    rune_pickups INT NOT NULL,
+    sen_placed INT NOT NULL,
+    stuns DECIMAL(32, 12) NOT NULL,
+    teamfight_participation DECIMAL(32, 12) NOT NULL,
+    tower_damage INT NOT NULL,
+    towers_killed INT NOT NULL,
+    xp_per_min INT NOT NULL,
+    personaname VARCHAR(255) NOT NULL,
+    name VARCHAR(255),
+    last_login VARCHAR(255),
+    radiant_win BIT NOT NULL,
+    start_time INT NOT NULL,
+    duration INT NOT NULL,
+    cluster INT NOT NULL,
+    lobby_type INT NOT NULL,
+    game_mode INT NOT NULL,
+    is_contributor BIT NOT NULL,
+    patch INT NOT NULL,
+    region INT NOT NULL,
+    isRadiant BIT NOT NULL,
+    win INT NOT NULL,
+    lose INT NOT NULL,
+    total_gold INT NOT NULL,
+    total_xp INT NOT NULL,
+    kda INT NOT NULL,
+    abandons INT NOT NULL,
+    neutral_kills INT NOT NULL,
+    tower_kills INT NOT NULL,
+    courier_kills INT NOT NULL,
+    lane_kills INT NOT NULL,
+    hero_kills INT NOT NULL,
+    observer_kills INT NOT NULL,
+    sentry_kills INT NOT NULL,
+    roshan_kills INT NOT NULL,
+    necronomicon_kills INT NOT NULL,
+    ancient_kills INT NOT NULL,
+    buyback_count INT NOT NULL,
+    observer_uses INT NOT NULL,
+    sentry_uses INT NOT NULL,
+    lane_efficiency DECIMAL(32, 12) NOT NULL,
+    lane_efficiency_pct INT NOT NULL,
+    lane INT NOT NULL,
+    lane_role INT NOT NULL,
+    is_roaming BIT NOT NULL,
+    purchase_tpscroll INT NOT NULL,
+    actions_per_min INT NOT NULL,
+    life_state_dead INT NOT NULL,
+    rank_tier INT
+
+	PRIMARY KEY (player_id),
+	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )

@@ -35,6 +35,10 @@ trait DaoSchema {
         querySchema[ChatDao]("Chat")
     }
 
+    val ObjectiveSchema = quote {
+        querySchema[ObjectiveDao] ("Objective")
+    }
+
     val DraftTimingSchema = quote {
         querySchema[DraftTimingDao]("DraftTiming")
     }

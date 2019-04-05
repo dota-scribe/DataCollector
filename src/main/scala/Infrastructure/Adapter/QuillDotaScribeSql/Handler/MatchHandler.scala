@@ -1,6 +1,6 @@
 package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 
-import Core.Application.Port.OpenDota.Model.{ChatDao, DraftTimingDao, Match, PickBanDao}
+import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
 
 class MatchHandler(context: PostgresContext) extends DaoSchema {
@@ -11,14 +11,30 @@ class MatchHandler(context: PostgresContext) extends DaoSchema {
         val teamFightHandler = new TeamFightHandler(Context)
 
         val matchId = InsertMatch(matchData)
-        InsertChat(matchData)
+        InsertChat(matchId, matchData.chat)
+        InsertObjective(matchId, matchData.objectives)
         InsertDraftTiming(matchData)
         InsertPickBan(matchData)
         InsertRadiantGoldAdvantage(matchData)
         InsertRadiantXpAdvantage(matchData)
-        teamFightHandler.ProcessTeamFight(matchId, matchData.teamfights)
+        InsertLeague(matchId, matchData.league)
+
+        teamFightHandler.ProcessTeamFights(matchId, matchData.teamfights)
 
         matchId
+    }
+
+    private def InsertLeague(matchId: Long, league: League): Unit = {
+        val leagueInsert = quote(LeagueSchema.insert(lift(LeagueDao(
+            matchId,
+            league.leagueid,
+            league.ticket,
+            league.banner,
+            league.tier,
+            league.name
+        ))))
+
+        Context.run(leagueInsert)
     }
 
     private def InsertRadiantXpAdvantage(matchData: Match): Unit = {
@@ -41,6 +57,28 @@ class MatchHandler(context: PostgresContext) extends DaoSchema {
         }
 
         Context.run(goldAdvantageInsert)
+    }
+
+    private def InsertObjective(matchId: Long, objectives: List[Objective]): Unit = {
+        objectives.foreach{objective =>{
+            val key: Option[String] = objective.key match {
+                case Some(key) => key.fold(l => Option(l), r => Option(r.toString))
+                case None => None
+            }
+
+            val objectiveInsert = quote(ObjectiveSchema.insert(lift(ObjectiveDao(
+                matchId,
+                objective.time,
+                objective.`type`,
+                objective.unit,
+                objective.slot,
+                key,
+                objective.player_slot,
+                objective.team
+            ))))
+
+            Context.run(objectiveInsert)
+        }}
     }
 
     private def InsertPickBan(matchData: Match): Unit = {
@@ -75,10 +113,10 @@ class MatchHandler(context: PostgresContext) extends DaoSchema {
         Context.run(draftTimingInsert)
     }
 
-    private def InsertChat(matchData: Match): Unit = {
+    private def InsertChat(matchId: Long, chatMessages: List[Chat]): Unit = {
         val chatInsert = quote {
-            liftQuery(matchData.chat).foreach(chat => ChatSchema.insert(ChatDao(
-                lift(matchData.match_id),
+            liftQuery(chatMessages).foreach(chat => ChatSchema.insert(ChatDao(
+                lift(matchId),
                 chat.time,
                 chat.unit,
                 chat.key,

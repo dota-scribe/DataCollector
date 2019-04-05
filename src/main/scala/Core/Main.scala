@@ -4,6 +4,7 @@ import Core.Application.AppService.{DotaScribeDbService, MatchAppService, ProApp
 import Core.Application.CommandHandler.CliCommandHandler
 import Infrastructure.Adapter.OpenDota.MsSql.DotaScribeSql
 import Infrastructure.Adapter.OpenDota.OpenDotaAdaptor
+import Infrastructure.Adapter.QuillDotaScribeSql.DAO.PostgresContext
 import Infrastructure.Adapter.QuillDotaScribeSql.QuillDotaScribeSql
 import Presentation.Cli.Cli
 import com.typesafe.config.ConfigFactory
@@ -21,11 +22,13 @@ object Main extends App {
     val password = conf.getString("SqlServer.password")
 
 
-    val dbInstance = Database.forURL(url, user, password, null, jdbcDriver)
+//    val dbInstance = Database.forURL(url, user, password, null, jdbcDriver)
+
+    val sqlContext = new PostgresContext()
 
     val openDotaAdapter = new OpenDotaAdaptor()
     //    val dotaScribeSql = new DotaScribeSql(dbInstance)
-    val dotaScribeSql = new QuillDotaScribeSql()
+    val dotaScribeSql = new QuillDotaScribeSql(sqlContext)
     val dotaScribeDbService = new DotaScribeDbService(dotaScribeSql)
     val matchAppService = new MatchAppService(openDotaAdapter, dotaScribeSql)
     val proAppService = new ProAppService(openDotaAdapter, dotaScribeSql)

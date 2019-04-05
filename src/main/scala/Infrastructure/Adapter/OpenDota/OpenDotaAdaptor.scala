@@ -63,7 +63,14 @@ class OpenDotaAdaptor extends OpenDotaPort {
         val filename = "C:\\Users\\rnel6\\IdeaProjects\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
         val line = Source.fromFile(filename).mkString
 
-        implicit val matchDecoder = deriveDecoder[Match]
+//        implicit val matchDecoder = deriveDecoder[Match]
+
+        // Custom decoder to handle type Either[String, Int]
+        implicit def matchDecoder[A,B](implicit a: Decoder[A], b: Decoder[B]): Decoder[Either[A,B]] = {
+            val left: Decoder[Either[A,B]]= a.map(Left.apply)
+            val right: Decoder[Either[A,B]]= b.map(Right.apply)
+            left or right
+        }
 
         val decodeResult = parse(line).flatMap(_.as[Match])
 

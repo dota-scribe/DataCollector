@@ -3,9 +3,9 @@ package Core.Application.Port.OpenDota.Model
 case class Objective (
     time: Int,
     `type`: String,
-    Unit: Option[String],
+    unit: Option[String],
     slot: Option[Int],
-    key: Option[String],
+    key: Option[Either[String, Int]],
     player_slot: Option[Int],
     team: Option[Int]
 )
