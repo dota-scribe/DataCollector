@@ -1,6 +1,6 @@
 package Core.Application.Port.OpenDota.Model
 
-case class MatchPlayer(
+case class Player(
     match_id: Long,
     player_slot: Int,
     ability_targets: Map[String, Map[String, Int]],
@@ -8,7 +8,7 @@ case class MatchPlayer(
     ability_uses: Map[String, Int],
     account_id: Long,
     actions: Map[Int, Int],
-    additional_units: Option[String],
+//    additional_units: Option[String], // TODO - MatchSample 6
     assists: Int,
     backpack_0: Int,
     backpack_1: Int,
@@ -53,7 +53,7 @@ case class MatchPlayer(
     party_size: Int,
     performance_others: Option[String],
     permanent_buffs: Option[List[Map[String, Int]]],
-    pings: Int,
+    pings: Option[Int],
     pred_vict: Boolean,
     randomed: Boolean,
     repicked: Option[Boolean],
@@ -65,7 +65,7 @@ case class MatchPlayer(
     tower_damage: Int,
     towers_killed: Int,
     xp_per_min: Int,
-    personaname: String,
+    personaname: Option[String],
     name: Option[String],
     last_login: Option[String],
     radiant_win: Boolean,
@@ -76,7 +76,7 @@ case class MatchPlayer(
     game_mode: Int,
     is_contributor: Boolean,
     patch: Int,
-    region: Int,
+    region: Option[Int],
     isRadiant: Boolean,
     win: Int,
     lose: Int,

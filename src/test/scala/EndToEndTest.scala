@@ -1,15 +1,14 @@
-package Core
-
 import Core.Application.AppService.{DotaScribeDbService, MatchAppService, ProAppService}
 import Core.Application.CommandHandler.CliCommandHandler
-import Infrastructure.Adapter.OpenDota.{HttpWorker, OpenDotaAdaptor}
+import org.scalatest.FunSuite
+import Infrastructure.Adapter.OpenDota.OpenDotaAdaptor
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO.SqlServerContext
 import Infrastructure.Adapter.QuillDotaScribeSql.QuillDotaScribeSql
-import Presentation.Cli.Cli
+import Mocks.MockHttpWorker
 
-object Main extends App {
+class EndToEndTest extends FunSuite {
     val sqlContext = new SqlServerContext()
-    val httpWorker = new HttpWorker()
+    val httpWorker = new MockHttpWorker()
 
     val openDotaAdapter = new OpenDotaAdaptor(httpWorker)
     val dotaScribeSql = new QuillDotaScribeSql(sqlContext)
@@ -18,5 +17,17 @@ object Main extends App {
     val proAppService = new ProAppService(openDotaAdapter, dotaScribeSql)
     val cliCommandHandler = new CliCommandHandler(proAppService, dotaScribeDbService, matchAppService)
 
-    new Cli(cliCommandHandler).Init()
+
+    test("EndToEndTest") {
+        cliCommandHandler.GetMatch(1)
+        cliCommandHandler.GetMatch(2)
+        cliCommandHandler.GetMatch(3)
+        cliCommandHandler.GetMatch(4)
+        cliCommandHandler.GetMatch(5)
+        cliCommandHandler.GetMatch(6)
+        cliCommandHandler.GetMatch(7)
+        cliCommandHandler.GetMatch(8)
+        cliCommandHandler.GetMatch(9)
+        cliCommandHandler.GetMatch(10)
+    }
 }

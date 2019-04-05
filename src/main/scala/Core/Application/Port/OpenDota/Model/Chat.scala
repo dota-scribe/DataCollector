@@ -5,5 +5,5 @@ case class Chat (
     unit: Option[String],
     key: String,
     slot: Int,
-    player_slot: Int
+    player_slot: Option[Int]
 )

@@ -34,7 +34,24 @@ class Cli(cliPort: CliPort) {
         println("")
         print("> ")
 
-        val selection = StdIn.readInt()
-        cliPort.GetMatch(selection)
+//        val selection = StdIn.readInt()
+
+        var matches = List(
+            4610012482L,
+            4610050063L,
+            4610066727L,
+            4610126604L,
+            4610133550L,
+            4610157690L,
+            4610160338L,
+            4610235417L,
+            4610254465L,
+            4610260304L,
+        )
+
+        matches.map(matchId => cliPort.GetMatch(matchId))
+
+
+//        cliPort.GetMatch(selection)
     }
 }

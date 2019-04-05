@@ -3,8 +3,8 @@ package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 import Core.Application.Port.OpenDota.Model.{TeamFightDao, TeamFightPlayer, TeamFightPlayerDao, TeamFights}
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
 
-class TeamFightHandler(context: PostgresContext) extends DaoSchema {
-    override val Context: PostgresContext = context
+class TeamFightHandler(context: SqlServerContext) extends DaoSchema {
+    override val Context = context
     import Context._
 
     def ProcessTeamFights(matchId: Long, teamfights: List[TeamFights]): Unit = {
@@ -27,7 +27,7 @@ class TeamFightHandler(context: PostgresContext) extends DaoSchema {
 
     private def InsertTeamFightKilled(teamFightPlayerId: Long, kills: Map[String, Int]): Unit = {
         kills.foreach(kill => {
-            val killInsert = quote(TeamFightPlayerKilledSchema.insert(lift(TeamFightPlayerKilledDoa(
+            val killInsert = quote(TeamFightPlayerKilledSchema.insert(lift(TeamFightPlayerKillesDao(
                 teamFightPlayerId,
                 kill._1,
                 kill._2
@@ -125,7 +125,6 @@ class TeamFightHandler(context: PostgresContext) extends DaoSchema {
     }
 
     private def InsertTeamFight(matchId: Long, teamFight: TeamFights): Long = {
-
         val teamFightInsert = quote(TeamFightSchema.insert(lift(TeamFightDao(
             0,
             matchId,

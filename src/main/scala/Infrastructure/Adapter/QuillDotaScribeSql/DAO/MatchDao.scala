@@ -28,8 +28,8 @@ case class MatchDao(
     series_id: Int,
     series_type: Int,
     patch: Int,
-    region: Int,
-    comeback: Int,
-    stomp: Int,
+    region: Option[Int],
+    comeback: Option[Int],
+    stomp:  Option[Int],
     replay_url: String,
 )

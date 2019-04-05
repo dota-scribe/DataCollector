@@ -3,8 +3,8 @@ package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
 
-class MatchHandler(context: PostgresContext) extends DaoSchema {
-    override val Context: PostgresContext = context
+class MatchHandler(context: SqlServerContext) extends DaoSchema {
+    override val Context: SqlServerContext = context
     import Context._
 
     def ProcessMatch(matchData: Match): Long = {

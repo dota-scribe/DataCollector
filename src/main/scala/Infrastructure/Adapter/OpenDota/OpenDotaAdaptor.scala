@@ -13,55 +13,39 @@ import io.circe.parser._
 
 import scala.io.Source
 
-class OpenDotaAdaptor extends OpenDotaPort {
+class OpenDotaAdaptor(httpWorker: HttpWorkerTrait) extends OpenDotaPort {
     override def GetProPlayers(): List[ProPlayer] = {
-        val response = Http("https://api.opendota.com/api/proPlayers")
-            .header("Content-Type", "application/json")
-            .asString
-            .throwError
+        val response = httpWorker.GetProPlayers()
 
         implicit val proPlayerDecoder = deriveDecoder[ProPlayer]
 
-        val decodeResult : Either[Error, List[ProPlayer]] = parser.decode[List[ProPlayer]](response.body)
+        val decodeResult : Either[Error, List[ProPlayer]] = parser.decode[List[ProPlayer]](response)
 
         return decodeResult.getOrElse({throw new Exception("Error decoding ProPlayers JSON Response.")})
     }
 
     def GetProMatches() : List[ProMatch] =  {
-        val response = Http("https://api.opendota.com/api/proMatches")
-            .header("Content-Type", "application/json")
-            .asString
-            .throwError
+        val response = httpWorker.GetProMatches()
 
         implicit val proMatchDecoder = deriveDecoder[ProMatch]
 
-        val decodeResult: Either[Error, List[ProMatch]] = parser.decode[List[ProMatch]](response.body)
+        val decodeResult: Either[Error, List[ProMatch]] = parser.decode[List[ProMatch]](response)
 
         return decodeResult.getOrElse({throw new Exception("Error decoding ProMatch JSON Response.")})
     }
 
     def GetProMatches(lessThanMatchId: String) : List[ProMatch] = {
-        val response = Http("https://api.opendota.com/api/proMatches")
-            .header("Content-Type", "application/json")
-            .param("less_than_match_id", lessThanMatchId)
-            .asString
-            .throwError
+        val response = httpWorker.GetProMatches(lessThanMatchId)
 
         implicit val proMatchDecoder = deriveDecoder[ProMatch]
 
-        val decodeResult: Either[Error, List[ProMatch]] = parser.decode[List[ProMatch]](response.body)
+        val decodeResult: Either[Error, List[ProMatch]] = parser.decode[List[ProMatch]](response)
 
         return decodeResult.getOrElse({throw new Exception("Error decoding ProMatch JSON Response.")})
     }
 
     def GetMatch(matchId: Long) : Match = {
-//        val response = Http("https://api.opendota.com/api/matches/" + matchId)
-//        .header("Content-Type", "application/json")
-//        .asString
-//        .throwError
-
-        val filename = "C:\\Users\\rnel6\\IdeaProjects\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
-        val line = Source.fromFile(filename).mkString
+        val response = httpWorker.GetMatch(matchId)
 
 //        implicit val matchDecoder = deriveDecoder[Match]
 
@@ -72,7 +56,7 @@ class OpenDotaAdaptor extends OpenDotaPort {
             left or right
         }
 
-        val decodeResult = parse(line).flatMap(_.as[Match])
+        val decodeResult = parse(response).flatMap(_.as[Match])
 
         return decodeResult.getOrElse({throw new Exception("Error decoding Match JSON Response")})
     }

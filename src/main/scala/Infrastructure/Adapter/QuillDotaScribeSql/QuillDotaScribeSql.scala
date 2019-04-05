@@ -3,10 +3,10 @@ package Infrastructure.Adapter.QuillDotaScribeSql
 import Core.Application.Port.DotaScribeRepository.DotaScribeRepositoryPort
 import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
-import Infrastructure.Adapter.QuillDotaScribeSql.Handler.{MatchHandler, TeamFightHandler}
+import Infrastructure.Adapter.QuillDotaScribeSql.Handler.{MatchHandler, PlayerHandler, TeamFightHandler}
 
-class QuillDotaScribeSql(context: PostgresContext) extends DotaScribeRepositoryPort with DaoSchema {
-    override val Context: PostgresContext = context
+class QuillDotaScribeSql(context: SqlServerContext) extends DotaScribeRepositoryPort with DaoSchema {
+    override val Context = context
 
     import Context._
 
@@ -69,6 +69,7 @@ class QuillDotaScribeSql(context: PostgresContext) extends DotaScribeRepositoryP
         val matchId = new MatchHandler(Context).ProcessMatch(matchData)
 
         new TeamFightHandler(Context).ProcessTeamFights(matchId, matchData.teamfights)
+        new PlayerHandler(Context).ProcessPlayer(matchId, matchData.players)
     }
 
 

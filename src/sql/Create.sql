@@ -125,9 +125,9 @@ CREATE TABLE Match (
 	series_id INT NOT NULL,
 	series_type INT NOT NULL,
 	patch INT NOT NULL,
-	region INT NOT NULL,
-	comeback INT NOT NULL,
-	stomp INT NOT NULL,
+	region INT,
+	comeback INT,
+	stomp INT,
 	replay_url VARCHAR(255) NOT NULL,
 
 	PRIMARY KEY (match_id),
@@ -139,7 +139,7 @@ CREATE TABLE Chat (
 	unit VARCHAR(255),
 	[key] VARCHAR(255) NOT NULL,
 	slot Int NOT NULL,
-	player_slot Int NOT NULL,
+	player_slot Int,
 
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
@@ -199,7 +199,7 @@ CREATE TABLE RadiantTeam (
 	team_id INT NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	tag VARCHAR(255) NOT NULL,
-	logo_url VARCHAR(255) NOT NULL
+	logo_url VARCHAR(255)
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
@@ -208,7 +208,7 @@ CREATE TABLE DireTeam (
 	team_id INT NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	tag VARCHAR(255) NOT NULL,
-	logo_url VARCHAR(255) NOT NULL
+	logo_url VARCHAR(255)
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
 )
 
@@ -298,7 +298,6 @@ CREATE TABLE Player (
     match_id BIGINT NOT NULL,
     player_slot INT NOT NULL,
     account_id BIGINT NOT NULL,
-    additional_units VARCHAR(255),
     assists INT NOT NULL,
     backpack_0 INT NOT NULL,
     backpack_1 INT NOT NULL,
@@ -328,7 +327,7 @@ CREATE TABLE Player (
     party_id INT NOT NULL,
     party_size INT NOT NULL,
     performance_others VARCHAR(255),
-    pings INT NOT NULL,
+    pings INT,
     pred_vict BIT NOT NULL,
     randomed BIT NOT NULL,
     repicked BIT,
@@ -340,7 +339,7 @@ CREATE TABLE Player (
     tower_damage INT NOT NULL,
     towers_killed INT NOT NULL,
     xp_per_min INT NOT NULL,
-    personaname VARCHAR(255) NOT NULL,
+    personaname VARCHAR(255),
     name VARCHAR(255),
     last_login VARCHAR(255),
     radiant_win BIT NOT NULL,
@@ -351,7 +350,7 @@ CREATE TABLE Player (
     game_mode INT NOT NULL,
     is_contributor BIT NOT NULL,
     patch INT NOT NULL,
-    region INT NOT NULL,
+    region INT,
     isRadiant BIT NOT NULL,
     win INT NOT NULL,
     lose INT NOT NULL,

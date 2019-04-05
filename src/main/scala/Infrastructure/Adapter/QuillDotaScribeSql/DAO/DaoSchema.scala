@@ -3,7 +3,7 @@ package Infrastructure.Adapter.QuillDotaScribeSql.DAO
 import Core.Application.Port.OpenDota.Model._
 
 trait DaoSchema {
-    val Context: PostgresContext
+    val Context: SqlServerContext
 
     import Context._
 
@@ -72,6 +72,10 @@ trait DaoSchema {
     }
 
     val TeamFightPlayerKilledSchema = quote {
-        querySchema[TeamFightPlayerKilledDoa]("TeamFightPlayerKilled")
+        querySchema[TeamFightPlayerKillesDao]("TeamFightPlayerKilled")
+    }
+
+    val PlayerSchema = quote {
+        querySchema[PlayerDao]("Player")
     }
 }

@@ -39,12 +39,12 @@ case class Match (
                      league: League,
                      radiant_team: Team,
                      dire_team: Team,
-                     players: List[MatchPlayer], // TODO
+                     players: List[Player], // TODO
                      patch: Int,
-                     region: Int,
+                     region: Option[Int],
                      //    all_word_counts: Map[String, Int],
                      //    my_word_counts: Map[String, Int],
-                     comeback: Int,
-                     stomp: Int,
+                     comeback: Option[Int],
+                     stomp:  Option[Int],
                      replay_url: String
 )

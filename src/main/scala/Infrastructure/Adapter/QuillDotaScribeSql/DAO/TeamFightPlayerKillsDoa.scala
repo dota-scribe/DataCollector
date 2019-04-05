@@ -1,6 +1,6 @@
 package Infrastructure.Adapter.QuillDotaScribeSql.DAO
 
-case class TeamFightPlayerKilledDoa (
+case class TeamFightPlayerKillesDao(
     teamfight_player_id: Long,
     killed: String,
     count: Int
