@@ -58,4 +58,16 @@ trait DaoSchema {
     val TeamFightPlayerAbilityUseSchema = quote {
         querySchema[TeamFightPlayerAbilityUseDoa]("TeamFightPlayerAbilityUse")
     }
+
+    val TeamFightPlayerAbilityTargetSchema = quote {
+        querySchema[TeamFightPlayerAbilityTargetDoa] ("TeamFightPlayerAbilityTarget")
+    }
+
+    val TeamFightPlayerItemUseSchema = quote {
+        querySchema[TeamFightPlayerItemUseDoa]("TeamFightPlayerItemUse")
+    }
+
+    val TeamFightPlayerKilledSchema = quote {
+        querySchema[TeamFightPlayerKilledDoa]("TeamFightPlayerKilled")
+    }
 }

@@ -3,7 +3,7 @@ package Core.Application.Port.OpenDota.Model
 case class TeamFightPlayer(
     deaths_pos: Map[Int, Map[Int, Int]],
     ability_uses: Map[String, Int],
-    ability_targets: Map[String, Int],
+    ability_targets: Map[String, Map[String, Int]],
     item_uses: Map[String, Int],
     killed: Map[String, Int],
     deaths: Int,

@@ -40,7 +40,10 @@ DROP TABLE IF EXISTS RadiantTeam
 DROP TABLE IF EXISTS DireTeam
 DROP TABLE IF EXISTS League
 DROP TABLE IF EXISTS TeamFightPlayerAbilityUse
+DROP TABLE IF EXISTS TeamFightPlayerAbilityTarget
 DROP TABLE IF EXISTS TeamFightPlayerDeathPosition
+DROP TABLE IF EXISTS TeamFightPlayerItemUse
+DROP TABLE IF EXISTS TeamFightPlayerKilled
 DROP TABLE IF EXISTS TeamFightPlayer
 DROP TABLE IF EXISTS TeamFight
 DROP TABLE IF EXISTS Match
@@ -245,6 +248,31 @@ CREATE TABLE TeamFightPlayerDeathPosition (
 CREATE TABLE TeamFightPlayerAbilityUse (
 	teamfight_player_id BIGINT NOT NULL,
 	ability VARCHAR(255) NOT NULL,
+	count INT NOT NULL,
+
+	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
+)
+
+CREATE TABLE TeamFightPlayerAbilityTarget (
+	teamfight_player_id BIGINT NOT NULL,
+	ability VARCHAR(255) NOT NULL,
+	target VARCHAR(255) NOT NULL, 
+	count INT NOT NULL,
+
+	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
+)
+
+CREATE TABLE TeamFightPlayerItemUse (
+	teamfight_player_id BIGINT NOT NULL,
+	item VARCHAR(255) NOT NULL,
+	count INT NOT NULL,
+
+	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)
+)
+
+CREATE TABLE TeamFightPlayerKilled (
+	teamfight_player_id BIGINT NOT NULL,
+	killed VARCHAR(255) NOT NULL,
 	count INT NOT NULL,
 
 	FOREIGN KEY (teamfight_player_id) REFERENCeS TeamFightPlayer(teamfight_player_id)

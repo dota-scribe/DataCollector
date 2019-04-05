@@ -60,7 +60,7 @@ class OpenDotaAdaptor extends OpenDotaPort {
 //        .asString
 //        .throwError
 
-        val filename = "C:\\Workspace\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
+        val filename = "C:\\Users\\rnel6\\IdeaProjects\\DotaScribe\\DataCollector\\src\\main\\scala\\matchSample.json"
         val line = Source.fromFile(filename).mkString
 
         implicit val matchDecoder = deriveDecoder[Match]
