@@ -2,8 +2,11 @@ package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 
 import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
+import io.getquill.context.jdbc.{BooleanObjectEncoding, JdbcContext}
+import io.getquill.context.sql.idiom.{ConcatSupport, SqlIdiom}
+import io.getquill.{H2Dialect, PostgresEscape, SQLServerDialect}
 
-class PlayerHandler(context: SqlServerContext) extends DaoSchema {
+class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: SqlIdiom with ConcatSupport, PostgresEscape.type] with BooleanObjectEncoding) extends DaoSchema {
     override val Context = context
     import Context._
 

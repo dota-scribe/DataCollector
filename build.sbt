@@ -9,6 +9,7 @@ libraryDependencies += "org.scala-lang.modules" %% "scala-parser-combinators" % 
 
 // Unit Tests
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.5" % "test"
+libraryDependencies += "org.scalamock" %% "scalamock" % "4.1.0" % Test
 
 // Http Requests
 libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.1"

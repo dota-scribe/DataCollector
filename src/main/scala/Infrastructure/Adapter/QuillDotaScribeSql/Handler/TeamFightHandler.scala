@@ -2,8 +2,11 @@ package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 
 import Core.Application.Port.OpenDota.Model.{TeamFightDao, TeamFightPlayer, TeamFightPlayerDao, TeamFights}
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
+import io.getquill.context.jdbc.{BooleanObjectEncoding, JdbcContext}
+import io.getquill.context.sql.idiom.{ConcatSupport, SqlIdiom}
+import io.getquill.{H2Dialect, PostgresEscape, SQLServerDialect, SqlServerJdbcContext}
 
-class TeamFightHandler(context: SqlServerContext) extends DaoSchema {
+class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: SqlIdiom with ConcatSupport, PostgresEscape.type] with BooleanObjectEncoding) extends DaoSchema {
     override val Context = context
     import Context._
 

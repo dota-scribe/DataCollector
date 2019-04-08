@@ -1,7 +1,8 @@
 package Core.Application.Port.OpenDota.Model
 
 case class TeamDao(
-    team_id: Int,
+    match_id: Long,
+    team_id: Long,
     name: String,
     tag: String,
     logo_url: Option[String]

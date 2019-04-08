@@ -2,9 +2,12 @@ package Infrastructure.Adapter.QuillDotaScribeSql.Handler
 
 import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
+import io.getquill.context.jdbc.{BooleanObjectEncoding, JdbcContext}
+import io.getquill.context.sql.idiom.{ConcatSupport, SqlIdiom}
+import io.getquill.{H2Dialect, PostgresEscape, SQLServerDialect, SqlServerJdbcContext}
 
-class MatchHandler(context: SqlServerContext) extends DaoSchema {
-    override val Context: SqlServerContext = context
+class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: SqlIdiom with ConcatSupport, PostgresEscape.type] with BooleanObjectEncoding) extends DaoSchema {
+    override val Context = context
     import Context._
 
     def ProcessMatch(matchData: Match): Long = {
@@ -18,13 +21,30 @@ class MatchHandler(context: SqlServerContext) extends DaoSchema {
         InsertRadiantGoldAdvantage(matchData)
         InsertRadiantXpAdvantage(matchData)
         InsertLeague(matchId, matchData.league)
+        InsertTeam(matchId, matchData.radiant_team, RadiantTeamSchema)
+        InsertTeam(matchId, matchData.dire_team, DireTeamSchema)
 
         teamFightHandler.ProcessTeamFights(matchId, matchData.teamfights)
 
         matchId
     }
 
+    private def InsertTeam(matchId: Long, team: Option[Team], schema: Context.Quoted[Context.EntityQuery[TeamDao]]): Unit = {
+        team.map(team=> {
+            val teamInsert = quote(schema.insert(lift(TeamDao(
+                matchId,
+                team.team_id,
+                team.name,
+                team.tag,
+                team.logo_url
+            ))))
+
+            Context.run(teamInsert)
+        })
+    }
+
     private def InsertLeague(matchId: Long, league: League): Unit = {
+
         val leagueInsert = quote(LeagueSchema.insert(lift(LeagueDao(
             matchId,
             league.leagueid,

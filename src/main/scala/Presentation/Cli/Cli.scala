@@ -12,21 +12,23 @@ class Cli(cliPort: CliPort) {
         println("You can find us at: https://github.com/dota-scribe/DataCollector")
         println("")
         println("Please select the data that you would like to collect:")
-        println("1: Collect Pro Data (OpenDota)")
+        println("1: Collect Pro Matches and Players (OpenDota)")
         println("2: Collect Pro Matches (OpenDota)")
         println("3: Get Match (OpenDota)")
+        println("4: Get All Pro Matches in DB")
         println("9: Regenerate DB Mappings")
         println("")
         print("> ")
-        cliPort.GetMatch(4595179473L)
-//        val selection = StdIn.readInt()
-//
-//        selection match {
-//            case 1 => cliPort.CollectProData()
-//            case 2 => cliPort.GetProMatches()
-//            case 3 => GetMatch()
-//            case 9 => cliPort.RegenerateDbMappings()
-//        }
+
+        val selection = StdIn.readInt()
+
+        selection match {
+            case 1 => cliPort.CollectProData()
+            case 2 => cliPort.CollectPromatchesFromOpenDota()
+            case 3 => GetMatch()
+            case 4 => cliPort.CollectProMatchesInDb()
+            case 9 => cliPort.RegenerateDbMappings()
+        }
     }
 
     def GetMatch(): Unit = {
@@ -34,24 +36,7 @@ class Cli(cliPort: CliPort) {
         println("")
         print("> ")
 
-//        val selection = StdIn.readInt()
-
-        var matches = List(
-            4610012482L,
-            4610050063L,
-            4610066727L,
-            4610126604L,
-            4610133550L,
-            4610157690L,
-            4610160338L,
-            4610235417L,
-            4610254465L,
-            4610260304L,
-        )
-
-        matches.map(matchId => cliPort.GetMatch(matchId))
-
-
-//        cliPort.GetMatch(selection)
+        val selection = StdIn.readInt()
+        cliPort.CollectMatch(selection)
     }
 }

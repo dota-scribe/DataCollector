@@ -18,7 +18,7 @@ case class MatchDao(
     negative_votes: Int,
     positive_votes: Int,
     radiant_score: Int,
-    radiant_team_id: Int,
+    radiant_team_id: Option[Long],
     skill: Option[Int],
     start_time: Int,
     tower_status_dire: Int,

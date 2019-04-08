@@ -115,7 +115,7 @@ CREATE TABLE Match (
 	negative_votes INT NOT NULL,
 	positive_votes INT NOT NULL,
 	radiant_score INT NOT NULL,
-	radiant_team_id INT NOT NULL,
+	radiant_team_id BIGINT,
 	skill INT,
 	start_time INT NOT NULL,
 	tower_status_dire INT NOT NULL,
@@ -196,7 +196,7 @@ CREATE TABLE RadiantXpAdvantage (
 
 CREATE TABLE RadiantTeam (
 	match_id BIGINT NOT NULL,
-	team_id INT NOT NULL,
+	team_id BIGINT NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	tag VARCHAR(255) NOT NULL,
 	logo_url VARCHAR(255)
@@ -205,7 +205,7 @@ CREATE TABLE RadiantTeam (
 
 CREATE TABLE DireTeam (
 	match_id BIGINT NOT NULL,
-	team_id INT NOT NULL,
+	team_id BIGINT NOT NULL,
 	name VARCHAR(255) NOT NULL,
 	tag VARCHAR(255) NOT NULL,
 	logo_url VARCHAR(255)

@@ -1,9 +1,12 @@
 package Infrastructure.Adapter.QuillDotaScribeSql.DAO
 
 import Core.Application.Port.OpenDota.Model._
+import io.getquill.context.jdbc.{BooleanObjectEncoding, JdbcContext}
+import io.getquill.context.sql.idiom.{ConcatSupport, SqlIdiom}
+import io.getquill._
 
 trait DaoSchema {
-    val Context: SqlServerContext
+    val Context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: SqlIdiom with ConcatSupport, PostgresEscape.type] with BooleanObjectEncoding
 
     import Context._
 
@@ -37,6 +40,14 @@ trait DaoSchema {
 
     val ObjectiveSchema = quote {
         querySchema[ObjectiveDao] ("Objective")
+    }
+
+    val RadiantTeamSchema = quote {
+        querySchema[TeamDao]("RadiantTeam")
+    }
+
+    val DireTeamSchema = quote {
+        querySchema[TeamDao]("DireTeam")
     }
 
     val DraftTimingSchema = quote {

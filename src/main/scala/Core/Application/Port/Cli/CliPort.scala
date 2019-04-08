@@ -2,8 +2,10 @@ package Core.Application.Port.Cli
 
 trait CliPort {
     def CollectProData()
-    def GetProMatches()
-    def GetProPlayers()
-    def GetMatch(matchId: Long)
+    def CollectPromatchesFromOpenDota()
+    def CollectProPlayersFromOpenDota()
+    def CollectMatch(matchId: Long)
+    def GetProMatchesFromDb()
     def RegenerateDbMappings()
+    def CollectProMatchesInDb()
 }

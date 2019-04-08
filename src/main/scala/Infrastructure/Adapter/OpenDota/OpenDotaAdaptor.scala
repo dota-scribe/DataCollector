@@ -58,6 +58,6 @@ class OpenDotaAdaptor(httpWorker: HttpWorkerTrait) extends OpenDotaPort {
 
         val decodeResult = parse(response).flatMap(_.as[Match])
 
-        return decodeResult.getOrElse({throw new Exception("Error decoding Match JSON Response")})
+        return decodeResult.getOrElse({throw new Exception("Error decoding Match JSON Response for Match: " + matchId)})
     }
 }
