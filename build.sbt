@@ -22,7 +22,7 @@ libraryDependencies ++= Seq(
 
 // Quill
 libraryDependencies ++= Seq(
-    "com.h2database" % "h2" % "1.4.199",
-    "com.microsoft.sqlserver" % "mssql-jdbc" % "6.1.7.jre8-preview",
+    "com.microsoft.sqlserver" % "mssql-jdbc" % "7.2.1.jre11",
+    "com.h2database" % "h2" % "1.4.199" % Test,
     "io.getquill" %% "quill-jdbc" % "3.1.0"
 )

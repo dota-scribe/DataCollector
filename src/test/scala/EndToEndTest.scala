@@ -8,7 +8,7 @@ import io.getquill._
 
 class EndToEndTest extends FunSuite {
     val sqlContext = new  H2JdbcContext(PostgresEscape, "testCtx")
-//    val mockSql = stub[SqlServerJdbcContext[PostgresEscape]]
+//    val sqlContext = new SqlServerJdbcContext(PostgresEscape, "ctx")
     val httpWorker = new MockHttpWorker()
 
     val openDotaAdapter = new OpenDotaAdaptor(httpWorker)
@@ -21,14 +21,14 @@ class EndToEndTest extends FunSuite {
 
     test("EndToEndTest") {
         cliCommandHandler.CollectMatch(1)
-        cliCommandHandler.CollectMatch(2)
-        cliCommandHandler.CollectMatch(3)
-        cliCommandHandler.CollectMatch(4)
-        cliCommandHandler.CollectMatch(5)
-        cliCommandHandler.CollectMatch(6)
-        cliCommandHandler.CollectMatch(7)
-        cliCommandHandler.CollectMatch(8)
-        cliCommandHandler.CollectMatch(9)
-        cliCommandHandler.CollectMatch(10)
+//        cliCommandHandler.CollectMatch(2)
+//        cliCommandHandler.CollectMatch(3)
+//        cliCommandHandler.CollectMatch(4)
+//        cliCommandHandler.CollectMatch(5)
+//        cliCommandHandler.CollectMatch(6)
+//        cliCommandHandler.CollectMatch(7)
+//        cliCommandHandler.CollectMatch(8)
+//        cliCommandHandler.CollectMatch(9)
+//        cliCommandHandler.CollectMatch(10)
     }
 }

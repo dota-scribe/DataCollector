@@ -11,8 +11,6 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
     import Context._
 
     def ProcessMatch(matchData: Match): Long = {
-        val teamFightHandler = new TeamFightHandler(Context)
-
         val matchId = InsertMatch(matchData)
         InsertChat(matchId, matchData.chat)
         InsertObjective(matchId, matchData.objectives)
@@ -23,8 +21,6 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
         InsertLeague(matchId, matchData.league)
         InsertTeam(matchId, matchData.radiant_team, RadiantTeamSchema)
         InsertTeam(matchId, matchData.dire_team, DireTeamSchema)
-
-        teamFightHandler.ProcessTeamFights(matchId, matchData.teamfights)
 
         matchId
     }

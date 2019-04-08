@@ -11,14 +11,14 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
     import Context._
 
     def ProcessTeamFights(matchId: Long, teamfights: List[TeamFights]): Unit = {
-        teamfights.foreach(fight => {
+        teamfights.map(fight => {
             val teamFightId = InsertTeamFight(matchId, fight)
             ProcessTeamFightPlayers(teamFightId, fight.players)
         })
     }
 
     private def ProcessTeamFightPlayers(teamFightId: Long, players: List[TeamFightPlayer]): Unit = {
-        players.foreach(player => {
+        players.map(player => {
             val teamFightPlayerId = InsertTeamFightPlayer(teamFightId, player)
             InsertTeamFightDeathPosition(teamFightPlayerId, player.deaths_pos)
             InsertTeamFightAbilityUse(teamFightPlayerId, player.ability_uses)
@@ -29,7 +29,7 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
     }
 
     private def InsertTeamFightKilled(teamFightPlayerId: Long, kills: Map[String, Int]): Unit = {
-        kills.foreach(kill => {
+        kills.map(kill => {
             val killInsert = quote(TeamFightPlayerKilledSchema.insert(lift(TeamFightPlayerKillesDao(
                 teamFightPlayerId,
                 kill._1,
@@ -41,7 +41,7 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
     }
 
     private def InsertTeamFightItemUse(teamFightPlayerId: Long, itemUse: Map[String, Int]): Unit = {
-        itemUse.foreach(item => {
+        itemUse.map(item => {
             val itemUseInsert = quote(TeamFightPlayerItemUseSchema.insert(lift(TeamFightPlayerItemUseDoa(
                 teamFightPlayerId,
                 item._1,

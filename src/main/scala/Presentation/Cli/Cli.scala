@@ -4,8 +4,6 @@ import Core.Application.Port.Cli.CliPort
 
 import scala.io.StdIn
 
-// TODO: Inject IProCommandHandler
-
 class Cli(cliPort: CliPort) {
     def Init(): Unit = {
         println("Welcome to the Dota Scribe Data Collector")
