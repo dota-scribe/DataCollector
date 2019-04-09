@@ -16,25 +16,35 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
 
     import Context._
 
-    override def GetProMatches(): List[ProMatch] = {
-        val proMatchDao = Context.run(ProMatchSchema)
+    override def GetProMatchesWithoutMatchData(): List[ProMatch] = {
+        val select = quote {
+            ProMatchSchema.leftJoin(MatchSchema).on((proGame, game) => proGame.match_id == game.match_id)
+        }
 
-        proMatchDao.map(matchData => ProMatch(
-            matchData.match_id,
-            matchData.duration,
-            matchData.start_time,
-            matchData.radiant_team_id,
-            matchData.radiant_name,
-            matchData.dire_team_id,
-            matchData.dire_name,
-            matchData.leagueid,
-            matchData.league_name,
-            matchData.series_id,
-            matchData.series_type,
-            matchData.radiant_score,
-            matchData.dire_score,
-            matchData.radiant_win,
-        ))
+        val joinData = Context.run(select)
+
+        val response = List[ProMatch]()
+
+        joinData.foreach(row => {
+            if (row._2.isEmpty) response :+ ProMatch(
+                row._1.match_id,
+                row._1.duration,
+                row._1.start_time,
+                row._1.radiant_team_id,
+                row._1.radiant_name,
+                row._1.dire_team_id,
+                row._1.dire_name,
+                row._1.leagueid,
+                row._1.league_name,
+                row._1.series_id,
+                row._1.series_type,
+                row._1.radiant_score,
+                row._1.dire_score,
+                row._1.radiant_win,
+            )
+        })
+
+        response
     }
 
     override def SaveProPlayers(proPlayers: List[ProPlayer]): Unit = {
@@ -99,6 +109,13 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
         new PlayerHandler(Context).ProcessPlayer(matchId, matchData.players)
     }
 
+    override def GetMinProMatchId(): Option[Long] = {
+        val select = quote{
+            ProMatchSchema.map(proMatch => proMatch.match_id)
+        }
+
+        Context.run(select.min)
+    }
 
     override def RebuildDbMappings(): Unit = ???
 

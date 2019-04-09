@@ -15,7 +15,7 @@ class Cli(cliPort: CliPort) {
         println("2: Collect Pro Matches (OpenDota)")
         println("3: Get Match (OpenDota)")
         println("4: Get All Pro Matches in DB")
-        println("5: Get All Pro Matches with ID lower than")
+        println("5: Load Pro Player Batches")
         println("9: Regenerate DB Mappings")
         println("")
         print("> ")
@@ -27,7 +27,7 @@ class Cli(cliPort: CliPort) {
             case 2 => cliPort.CollectPromatchesFromOpenDota()
             case 3 => GetMatch()
             case 4 => cliPort.CollectProMatchesInDb()
-            case 5 => GetProMatchLowerThan()
+            case 5 => GetNumBatches()
             case 9 => cliPort.RegenerateDbMappings()
         }
     }
@@ -41,12 +41,12 @@ class Cli(cliPort: CliPort) {
         cliPort.CollectMatch(selection)
     }
 
-    def GetProMatchLowerThan(): Unit = {
-        println("Please enter a match ID. The API will store all matches with an ID lower than this value")
+    def GetNumBatches(): Unit = {
+        println("Pro matches are retrieved in batches of 100, please enter the number of batches you would like to collect:")
         println("")
         print("> ")
 
-        val selection = StdIn.readLong()
-        cliPort.CollectPromatchesFromOpenDota(selection)
+        val selection = StdIn.readInt()
+        cliPort.LoadProMatchBatch(selection)
     }
 }
