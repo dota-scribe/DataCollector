@@ -95,8 +95,8 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
     override def SaveMatch(matchData: Match): Unit = {
         val matchId = new MatchHandler(Context).ProcessMatch(matchData)
 
-//        new TeamFightHandler(Context).ProcessTeamFights(matchId, matchData.teamfights)
-//        new PlayerHandler(Context).ProcessPlayer(matchId, matchData.players)
+        new TeamFightHandler(Context).ProcessTeamFights(matchId, matchData.teamfights)
+        new PlayerHandler(Context).ProcessPlayer(matchId, matchData.players)
     }
 
 

@@ -14,12 +14,12 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
         repository.SaveProMatches(proMatches)
     }
 
-    def GetProMatches(lessThanMatchId: String): Unit = {
-        val proMatches = openDotaPort.GetProMatches(lessThanMatchId)
+    def CollectProMatchesFromOpenDota(matchId: Long): Unit = {
+        val proMatches = openDotaPort.GetProMatches(matchId)
         repository.SaveProMatches(proMatches)
     }
 
-    def GetProMatches(): Unit = {
+    def GetProMatchesFromRepository(): Unit = {
         repository.GetProMatches()
     }
 
@@ -27,8 +27,12 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
         val proMatches = repository.GetProMatches()
 
         proMatches.map(proMatch => {
-            val matchData = openDotaPort.GetMatch(proMatch.match_id)
-            repository.SaveMatch(matchData)
+            try {
+                val matchData = openDotaPort.GetMatch(proMatch.match_id)
+                repository.SaveMatch(matchData)
+            } catch {
+                case _ : Throwable => println("Error Decoding Match :" + proMatch.match_id)
+            }
         })
     }
 }

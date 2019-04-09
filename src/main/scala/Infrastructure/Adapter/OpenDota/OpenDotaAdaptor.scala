@@ -34,8 +34,8 @@ class OpenDotaAdaptor(httpWorker: HttpWorkerTrait) extends OpenDotaPort {
         return decodeResult.getOrElse({throw new Exception("Error decoding ProMatch JSON Response.")})
     }
 
-    def GetProMatches(lessThanMatchId: String) : List[ProMatch] = {
-        val response = httpWorker.GetProMatches(lessThanMatchId)
+    def GetProMatches(lessThanMatchId: Long) : List[ProMatch] = {
+        val response = httpWorker.GetProMatches(lessThanMatchId.toString)
 
         implicit val proMatchDecoder = deriveDecoder[ProMatch]
 

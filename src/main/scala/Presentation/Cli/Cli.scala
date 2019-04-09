@@ -5,6 +5,7 @@ import Core.Application.Port.Cli.CliPort
 import scala.io.StdIn
 
 class Cli(cliPort: CliPort) {
+
     def Init(): Unit = {
         println("Welcome to the Dota Scribe Data Collector")
         println("You can find us at: https://github.com/dota-scribe/DataCollector")
@@ -14,6 +15,7 @@ class Cli(cliPort: CliPort) {
         println("2: Collect Pro Matches (OpenDota)")
         println("3: Get Match (OpenDota)")
         println("4: Get All Pro Matches in DB")
+        println("5: Get All Pro Matches with ID lower than")
         println("9: Regenerate DB Mappings")
         println("")
         print("> ")
@@ -25,6 +27,7 @@ class Cli(cliPort: CliPort) {
             case 2 => cliPort.CollectPromatchesFromOpenDota()
             case 3 => GetMatch()
             case 4 => cliPort.CollectProMatchesInDb()
+            case 5 => GetProMatchLowerThan()
             case 9 => cliPort.RegenerateDbMappings()
         }
     }
@@ -36,5 +39,14 @@ class Cli(cliPort: CliPort) {
 
         val selection = StdIn.readInt()
         cliPort.CollectMatch(selection)
+    }
+
+    def GetProMatchLowerThan(): Unit = {
+        println("Please enter a match ID. The API will store all matches with an ID lower than this value")
+        println("")
+        print("> ")
+
+        val selection = StdIn.readLong()
+        cliPort.CollectPromatchesFromOpenDota(selection)
     }
 }
