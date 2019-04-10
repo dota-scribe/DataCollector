@@ -7,6 +7,7 @@ import scala.io.StdIn
 class Cli(cliPort: CliPort) {
 
     def Init(): Unit = {
+        print("\033[2J")
         println("Welcome to the Dota Scribe Data Collector")
         println("You can find us at: https://github.com/dota-scribe/DataCollector")
         println("")
@@ -33,6 +34,7 @@ class Cli(cliPort: CliPort) {
     }
 
     def GetMatch(): Unit = {
+        print("\033[2J")
         println("Please enter match Id to retrieve")
         println("")
         print("> ")
@@ -42,6 +44,7 @@ class Cli(cliPort: CliPort) {
     }
 
     def GetNumBatches(): Unit = {
+        print("\033[2J")
         println("Pro matches are retrieved in batches of 100, please enter the number of batches you would like to collect:")
         println("")
         print("> ")
