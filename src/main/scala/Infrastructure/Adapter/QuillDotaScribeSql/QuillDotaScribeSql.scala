@@ -8,6 +8,8 @@ import io.getquill._
 import io.getquill.context.jdbc.{BooleanObjectEncoding, JdbcContext}
 import io.getquill.context.sql.idiom.{ConcatSupport, SqlIdiom}
 
+import scala.collection.mutable
+
 class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: SqlIdiom with ConcatSupport, PostgresEscape.type] with BooleanObjectEncoding)
     extends DotaScribeRepositoryPort
         with DaoSchema {
@@ -23,10 +25,12 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
 
         val joinData = Context.run(select)
 
-        val response = List[ProMatch]()
+        val response = mutable.MutableList[ProMatch]()
+
 
         joinData.foreach(row => {
-            if (row._2.isEmpty) response :+ ProMatch(
+            val test = row._2.isEmpty
+            if (row._2.isEmpty) response += ProMatch(
                 row._1.match_id,
                 row._1.duration,
                 row._1.start_time,
@@ -44,7 +48,7 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
             )
         })
 
-        response
+        response.toList
     }
 
     override def SaveProPlayers(proPlayers: List[ProPlayer]): Unit = {

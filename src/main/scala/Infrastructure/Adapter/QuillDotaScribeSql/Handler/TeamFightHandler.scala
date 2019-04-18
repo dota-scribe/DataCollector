@@ -42,7 +42,7 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
 
     private def InsertTeamFightItemUse(teamFightPlayerId: Long, itemUse: Map[String, Int]): Unit = {
         itemUse.map(item => {
-            val itemUseInsert = quote(TeamFightPlayerItemUseSchema.insert(lift(TeamFightPlayerItemUseDoa(
+            val itemUseInsert = quote(TeamFightPlayerItemUseSchema.insert(lift(TeamFightPlayerItemUseDao(
                 teamFightPlayerId,
                 item._1,
                 item._2
@@ -58,7 +58,7 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
             val targets = abilityUse._2
 
             targets.map(target => {
-                val teamFightAbilityTargetInsert = quote(TeamFightPlayerAbilityTargetSchema.insert(lift(TeamFightPlayerAbilityTargetDoa(
+                val teamFightAbilityTargetInsert = quote(TeamFightPlayerAbilityTargetSchema.insert(lift(TeamFightPlayerAbilityTargetDao(
                     teamFightPlayerId,
                     ability,
                     target._1,
@@ -72,7 +72,7 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
 
     private def InsertTeamFightAbilityUse(teamFightPlayerId: Long, abilityUse: Map[String, Int]): Unit = {
         abilityUse.foreach(ability => {
-            val abilityUseInsert = quote(TeamFightPlayerAbilityUseSchema.insert(lift(TeamFightPlayerAbilityUseDoa(
+            val abilityUseInsert = quote(TeamFightPlayerAbilityUseSchema.insert(lift(TeamFightPlayerAbilityUseDao(
                 teamFightPlayerId,
                 ability._1,
                 ability._2

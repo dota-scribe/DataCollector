@@ -1,13 +1,13 @@
 package Core.Application.Port.OpenDota.Model
 
 // TODO - ancillary tables to contain keys to join back to base player table: match_id, player_slot
-// TODO - priority: ability_targets, ability_uses, damage_x, gold_t, kills_log, lane_pos (sorry!), lh_t, obs_log, purchase_log, runes, sen_log
+// TODO - priority: lh_t, obs_log, purchase_log, runes, sen_log
 case class Player(
     match_id: Long,
     player_slot: Int,
-    ability_targets: Map[String, Map[String, Int]], // TODO [ability(header), target(header2), count(data2)]
+    ability_targets: Map[String, Map[String, Int]],
     ability_upgrades_arr: List[Int], // TODO [level(array_index), ability_id(array_value)]
-    ability_uses: Map[String, Int], // TODO [ability(header), count(data)]
+    ability_uses: Map[String, Int], //
     account_id: Long,
     actions: Map[Int, Int],
     //additional_units: Option[String],  TODO [columns=headers, values=data] 1 row per list element
@@ -21,11 +21,11 @@ case class Player(
     // connection_log,
 
     creeps_stacked: Int,
-    damage: Map[String, Int], // TODO [unit(header), damage(data)]
-    damage_inflictor: Map[String, Int], // TODO [source(header), value(data)]
-    damage_inflictor_received: Map[String, Int], // TODO [source_ability(header), value(data)]
-    damage_taken: Map[String, Int], // TODO [source_unit(header), value(data)]
-    damage_targets: Map[String, Map[String, Int]], // TODO [source(header), target(header2), value(data)]
+    damage: Map[String, Int],
+    damage_inflictor: Map[String, Int],
+    damage_inflictor_received: Map[String, Int],
+    damage_taken: Map[String, Int],
+    damage_targets: Map[String, Map[String, Int]],
     deaths: Int,
     denies: Int,
     dn_t: List[Int],
@@ -34,7 +34,7 @@ case class Player(
     gold_per_min: Int,
     gold_reasons: Map[Int, Double], // TODO [source_id(header), value(data)]
     gold_spent: Int,
-    gold_t: List[Int], // TODO [time(array_index), ability_id(array_value)]
+    gold_t: List[Int],
 
     // End of by hand
     hero_damage: Int,
@@ -51,8 +51,8 @@ case class Player(
     // TODO kill_streaks: Map[Int, Int], [length(header), occurences(data)]
     // TODO killed: Map[String, Int], [unit(header), value(data)]
     // TODO killed_by: Map[String, Int], [unit(header), value(data)]
-    // TODO kills_log: List[Map[String, Int]], [columns=headers, values=data]
-    // TODO lane_pos: Not sure how to represent this one. This looks like x_pos[y_pos:time] to me. See if it's possible, otherwise ignore.
+    kills_log: List[PlayerKillLog],
+    lane_pos: Map[Int, Map[Int, Int]],
     kills: Int,
     last_hits: Int,
     leaver_status: Int,

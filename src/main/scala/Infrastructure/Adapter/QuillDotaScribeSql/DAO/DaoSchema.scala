@@ -71,15 +71,15 @@ trait DaoSchema {
     }
 
     val TeamFightPlayerAbilityUseSchema = quote {
-        querySchema[TeamFightPlayerAbilityUseDoa]("TeamFightPlayerAbilityUse")
+        querySchema[TeamFightPlayerAbilityUseDao]("TeamFightPlayerAbilityUse")
     }
 
     val TeamFightPlayerAbilityTargetSchema = quote {
-        querySchema[TeamFightPlayerAbilityTargetDoa] ("TeamFightPlayerAbilityTarget")
+        querySchema[TeamFightPlayerAbilityTargetDao] ("TeamFightPlayerAbilityTarget")
     }
 
     val TeamFightPlayerItemUseSchema = quote {
-        querySchema[TeamFightPlayerItemUseDoa]("TeamFightPlayerItemUse")
+        querySchema[TeamFightPlayerItemUseDao]("TeamFightPlayerItemUse")
     }
 
     val TeamFightPlayerKilledSchema = quote {
@@ -88,5 +88,45 @@ trait DaoSchema {
 
     val PlayerSchema = quote {
         querySchema[PlayerDao]("Player")
+    }
+
+    val PlayerAbilityTargetSchema = quote {
+        querySchema[PlayerAbilityTargetDao]("PlayerAbilityTarget")
+    }
+
+    val PlayerAbilityUseSchema = quote {
+        querySchema[PlayerAbilityUseDao]("PlayerAbilityUse")
+    }
+
+    val PlayerKillLogSchema = quote {
+        querySchema[PlayerKillLogDao]("PlayerKillLog")
+    }
+
+    val PlayerLanePositionSchema = quote {
+        querySchema[PlayerLanePositionDao]("PlayerLanePosition")
+    }
+
+    val PlayerDamageSchema = quote {
+        querySchema[PlayerDamageDao]("PlayerDamage")
+    }
+
+    val PlayerDamageInflictorSchema = quote {
+        querySchema[PlayerDamageInflictorDao]("PlayerDamageInflictor")
+    }
+
+    val PlayerDamageInflictorRecievedSchema = quote {
+        querySchema[PlayerDamageInflictorRecievedDao]("PlayerDamageInflictorRecieved")
+    }
+
+    val PlayerDamageTakenSchema = quote {
+        querySchema[PlayerDamageTakenDao]("PlayerDamageTaken")
+    }
+
+    val PlayerDamageTargetSchema = quote {
+        querySchema[PlayerDamageTargetDao]("PlayerDamageTarget")
+    }
+
+    val PlayerGoldTotalSchema = quote {
+        querySchema[PlayerGoldTotalDao]("PlayerGoldTotal")
     }
 }

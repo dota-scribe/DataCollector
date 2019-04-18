@@ -26,7 +26,7 @@ class CliCommandHandler(proAppService: ProAppService, dotaScribeDbService: DotaS
     }
 
     override def CollectProMatchesInDb(): Unit = {
-        proAppService.SyncProMatchDataWithMatches()
+        proAppService.CollectProMatchesInDb()
     }
 
     override def CollectPromatchesFromOpenDota(matchId: Long): Unit = {

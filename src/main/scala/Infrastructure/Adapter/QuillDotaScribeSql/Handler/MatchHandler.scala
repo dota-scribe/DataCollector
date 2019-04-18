@@ -40,7 +40,6 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
     }
 
     private def InsertLeague(matchId: Long, league: League): Unit = {
-
         val leagueInsert = quote(LeagueSchema.insert(lift(LeagueDao(
             matchId,
             league.leagueid,

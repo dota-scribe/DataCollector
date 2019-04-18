@@ -19,11 +19,12 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
         repository.SaveProMatches(proMatches)
     }
 
-    def SyncProMatchDataWithMatches(): Unit = {
+    def CollectProMatchesInDb(): Unit = {
         val proMatches = repository.GetProMatchesWithoutMatchData()
 
         proMatches.map(proMatch => {
             try {
+                println("Loading match data for matchId:" + proMatch.match_id)
                 val matchData = openDotaPort.GetMatch(proMatch.match_id)
                 repository.SaveMatch(matchData)
             } catch {

@@ -47,6 +47,16 @@ DROP TABLE IF EXISTS TeamFightPlayerItemUse
 DROP TABLE IF EXISTS TeamFightPlayerKilled
 DROP TABLE IF EXISTS TeamFightPlayer
 DROP TABLE IF EXISTS TeamFight
+DROP TABLE IF EXISTS PlayerAbilityTarget
+DROP TABLE IF EXISTS PlayerAbilityUse
+DROP TABLE IF EXISTS PlayerKillLog
+DROP TABLE IF EXISTS PlayerLanePosition
+DROP TABLE IF EXISTS PlayerDamage
+DROP TABLE IF EXISTS PlayerDamageInflictor
+DROP TABLE IF EXISTS PlayerDamageInflictorRecieved
+DROP TABLE IF EXISTS PlayerDamageTaken
+DROP TABLE IF EXISTS PlayerDamageTarget
+DROP TABLE IF EXISTS PlayerGoldTotal
 DROP TABLE IF EXISTS Player
 DROP TABLE IF EXISTS Match
 
@@ -383,4 +393,86 @@ CREATE TABLE Player (
 
 	PRIMARY KEY (player_id),
 	FOREIGN KEY (match_id) REFERENCES Match(match_id)
+)
+
+CREATE TABLE PlayerAbilityTarget (
+	player_id BIGINT NOT NULL,
+	ability VARCHAR(255) NOT NULL,
+	target VARCHAR(255) NOT NULL,
+	count INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerAbilityUse (
+	player_id BIGINT NOT NULL,
+	ability VARCHAR(255) NOT NULL,
+	count INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerKillLog (
+	player_id BIGINT NOT NULL,
+	time INT NOT NULL,
+	killed VARCHAR(255) NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerLanePosition (
+	player_id BIGINT NOT NULL,
+	x INT NOT NULL,
+	y INT NOT NULL,
+	density INT NOT NULL
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerDamage (
+	player_id BIGINT NOT NULL,
+	unit VARCHAR(255) NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerDamageInflictor (
+	player_id BIGINT NOT NULL,
+	source VARCHAR(255) NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerDamageInflictorRecieved (
+	player_id BIGINT NOT NULL,
+	source_ability VARCHAR(255) NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerDamageTaken (
+	player_id BIGINT NOT NULL,
+	source_unit VARCHAR(255) NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerDamageTarget (
+	player_id BIGINT NOT NULL,
+	source VARCHAR(255) NOT NULL,
+	target VARCHAR(255) NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
+)
+
+CREATE TABLE PlayerGoldTotal (
+	player_id BIGINT NOT NULL,
+	value INT NOT NULL,
+
+	FOREIGN KEY (player_id) REFERENCeS Player(player_id)
 )
