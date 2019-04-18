@@ -4,11 +4,11 @@ case class Match (
      match_id: Long,
      barracks_status_dire: Int,
      barracks_status_radiant: Int,
-     chat: List[Chat],
+     chat: Option[List[Chat]],
      cluster: Int,
-     cosmetics: Map[String, Int], // TODO
+     cosmetics: Option[Map[String, Int]], // TODO
      dire_score: Int,
-     dire_team_id: Int,
+     dire_team_id: Option[Int],
      draft_timings: List[DraftTiming],
      duration: Int,
      engine: Int,

@@ -113,7 +113,7 @@ CREATE TABLE Match (
 	barracks_status_radiant INT NOT NULL,
 	cluster INT NOT NULL,
 	dire_score INT NOT NULL,
-	dire_team_id INT NOT NULL,
+	dire_team_id INT,
 	duration INT NOT NULL,
 	engine INT NOT NULL,
 	first_blood_time INT NOT NULL,
@@ -386,7 +386,7 @@ CREATE TABLE Player (
     lane INT NOT NULL,
     lane_role INT NOT NULL,
     is_roaming BIT NOT NULL,
-    purchase_tpscroll INT NOT NULL,
+    purchase_tpscroll INT,
     actions_per_min INT NOT NULL,
     life_state_dead INT NOT NULL,
     rank_tier INT

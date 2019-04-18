@@ -6,7 +6,7 @@ case class MatchDao(
     barracks_status_radiant: Int,
     cluster: Int,
     dire_score: Int,
-    dire_team_id: Int,
+    dire_team_id: Option[Int],
     duration: Int,
     engine: Int,
     first_blood_time: Int,

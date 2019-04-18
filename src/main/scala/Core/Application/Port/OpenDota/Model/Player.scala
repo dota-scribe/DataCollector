@@ -118,7 +118,7 @@ case class Player(
     lane: Int,
     lane_role: Int,
     is_roaming: Boolean,
-    purchase_tpscroll: Int,
+    purchase_tpscroll: Option[Int],
     actions_per_min: Int,
     life_state_dead: Int,
     rank_tier: Option[Int]

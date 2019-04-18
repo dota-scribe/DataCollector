@@ -128,9 +128,11 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
         Context.run(draftTimingInsert)
     }
 
-    private def InsertChat(matchId: Long, chatMessages: List[Chat]): Unit = {
+    private def InsertChat(matchId: Long, chatMessages: Option[List[Chat]]): Unit = {
+        val chatMessage = chatMessages.getOrElse(List[Chat]())
+
         val chatInsert = quote {
-            liftQuery(chatMessages).foreach(chat => ChatSchema.insert(ChatDao(
+            liftQuery(chatMessage).foreach(chat => ChatSchema.insert(ChatDao(
                 lift(matchId),
                 chat.time,
                 chat.unit,
