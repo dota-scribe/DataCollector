@@ -5,36 +5,36 @@ package Core.Application.Port.OpenDota.Model
 case class Player(
     match_id: Long,
     player_slot: Int,
-    ability_targets: Map[String, Map[String, Int]],
+    ability_targets: Option[Map[String, Map[String, Int]]],
     ability_upgrades_arr: List[Int], // TODO [level(array_index), ability_id(array_value)]
-    ability_uses: Map[String, Int], //
+    ability_uses: Option[Map[String, Int]],
     account_id: Long,
-    actions: Map[Int, Int],
+    actions: Option[Map[Int, Int]], // Not done
     //additional_units: Option[String],  TODO [columns=headers, values=data] 1 row per list element
     assists: Int,
     backpack_0: Int,
     backpack_1: Int,
     backpack_2: Int,
-    buyback_log: List[BuyBackLog], // TODO [columns=headers, values=data] 1 row per list element
-    camps_stacked: Int,
+    buyback_log: Option[List[BuyBackLog]], // TODO [columns=headers, values=data] 1 row per list element
+    camps_stacked: Option[Int],
 
     // connection_log,
 
-    creeps_stacked: Int,
-    damage: Map[String, Int],
-    damage_inflictor: Map[String, Int],
-    damage_inflictor_received: Map[String, Int],
-    damage_taken: Map[String, Int],
-    damage_targets: Map[String, Map[String, Int]],
+    creeps_stacked: Option[Int],
+    damage: Option[Map[String, Int]],
+    damage_inflictor: Option[Map[String, Int]],
+    damage_inflictor_received: Option[Map[String, Int]],
+    damage_taken: Option[Map[String, Int]],
+    damage_targets: Option[Map[String, Map[String, Int]]],
     deaths: Int,
     denies: Int,
-    dn_t: List[Int],
-    firstblood_claimed: Int,
+    dn_t: Option[List[Int]], // Not done
+    firstblood_claimed: Option[Int],
     gold: Int,
     gold_per_min: Int,
-    gold_reasons: Map[Int, Double], // TODO [source_id(header), value(data)]
+    gold_reasons: Option[Map[Int, Double]], // TODO [source_id(header), value(data)]
     gold_spent: Int,
-    gold_t: List[Int],
+    gold_t: Option[List[Int]],
 
     // End of by hand
     hero_damage: Int,
@@ -51,8 +51,8 @@ case class Player(
     // TODO kill_streaks: Map[Int, Int], [length(header), occurences(data)]
     // TODO killed: Map[String, Int], [unit(header), value(data)]
     // TODO killed_by: Map[String, Int], [unit(header), value(data)]
-    kills_log: List[PlayerKillLog],
-    lane_pos: Map[Int, Map[Int, Int]],
+    kills_log: Option[List[PlayerKillLog]],
+    lane_pos: Option[Map[Int, Map[Int, Int]]],
     kills: Int,
     last_hits: Int,
     leaver_status: Int,
@@ -61,21 +61,21 @@ case class Player(
     // TODO multi_kills: [multiple(header), occurences(data)]
     // TODO obs_log List[Map[String...]], [time, x, y]
     // TODO purchase_log: List[Map[String, Int]], [item(key), time(time)]
-    obs_placed: Int,
+    obs_placed: Option[Int],
     party_id: Int,
     party_size: Int,
     performance_others: Option[String],
     permanent_buffs: Option[List[Map[String, Int]]],
     pings: Option[Int],
-    pred_vict: Boolean,
-    randomed: Boolean,
+    pred_vict: Option[Boolean],
+    randomed: Option[Boolean],
     repicked: Option[Boolean],
-    roshans_killed: Int,
-    rune_pickups: Int,
+    roshans_killed: Option[Int],
+    rune_pickups: Option[Int],
     // TODO runes: Map[String, Int], [rune_id(header), count(data)]
     // TODO sen_log List[Map[String...]], [time, x, y]
-    sen_placed: Int,
-    stuns: BigDecimal,
+    sen_placed: Option[Int],
+    stuns: Option[BigDecimal],
     teamfight_participation: BigDecimal,
     tower_damage: Int,
     towers_killed: Int,

@@ -6,7 +6,8 @@ trait CliPort {
     def CollectPromatchesFromOpenDota()
     def CollectProPlayersFromOpenDota()
     def CollectMatch(matchId: Long)
-    def RegenerateDbMappings()
     def CollectProMatchesInDb()
     def LoadProMatchBatch(numBatches: Int)
+    def CollectPremiumMatches()
+    def CollectPremiumMatchesInDb()
 }

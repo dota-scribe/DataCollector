@@ -27,7 +27,7 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
     }
 
     def InsertPlayer(matchId: Long, player: Player): Long = {
-        val teamFightInsert = quote(PlayerSchema.insert(lift(PlayerDao(
+        val playerData = PlayerDao(
             0,
             player.match_id,
             player.player_slot,
@@ -36,11 +36,11 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
             player.backpack_0,
             player.backpack_1,
             player.backpack_2,
-            player.camps_stacked,
-            player.creeps_stacked,
+            player.camps_stacked.getOrElse(0),
+            player.creeps_stacked.getOrElse(0),
             player.deaths,
             player.denies,
-            player.firstblood_claimed,
+            player.firstblood_claimed.getOrElse(0),
             player.gold,
             player.gold_per_min,
             player.gold_spent,
@@ -57,7 +57,7 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
             player.last_hits,
             player.leaver_status,
             player.level,
-            player.obs_placed,
+            player.obs_placed.getOrElse(0),
             player.party_id,
             player.party_size,
             player.performance_others,
@@ -65,10 +65,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
             player.pred_vict,
             player.randomed,
             player.repicked,
-            player.roshans_killed,
-            player.rune_pickups,
-            player.sen_placed,
-            player.stuns,
+            player.roshans_killed.getOrElse(0),
+            player.rune_pickups.getOrElse(0),
+            player.sen_placed.getOrElse(0),
+            player.stuns.getOrElse(0),
             player.teamfight_participation,
             player.tower_damage,
             player.towers_killed,
@@ -114,13 +114,17 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
             player.actions_per_min,
             player.life_state_dead,
             player.rank_tier
-        ))).returning(_.player_id))
+        )
+
+        val teamFightInsert = quote(PlayerSchema.insert(lift(playerData)).returning(_.player_id))
 
         Context.run(teamFightInsert)
     }
 
-    def InsertAbilityTarget(playerId: Long, abilityTargets: Map[String, Map[String, Int]]): Unit ={
-        abilityTargets.map(abilityUse => {
+    def InsertAbilityTarget(playerId: Long, abilityTargets: Option[Map[String, Map[String, Int]]]): Unit ={
+        val abilityTarget = abilityTargets.getOrElse(Map[String, Map[String, Int]]())
+
+        abilityTarget.map(abilityUse => {
             val ability = abilityUse._1
             val targets = abilityUse._2
 
@@ -137,8 +141,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertAbilityUse(playerId: Long, abilityUse: Map[String, Index]): Unit = {
-        abilityUse.map(abilityUse => {
+    def InsertAbilityUse(playerId: Long, abilityUse: Option[Map[String, Index]]): Unit = {
+        val abilityUses = abilityUse.getOrElse(Map[String, Index]())
+
+        abilityUses.map(abilityUse => {
             val abilityUseInsert = quote(PlayerAbilityUseSchema.insert(lift(PlayerAbilityUseDao(
                 playerId,
                 abilityUse._1,
@@ -149,8 +155,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerKillLog(playerId: Long, killLog: List[PlayerKillLog]): Unit = {
-        killLog.map(kill => {
+    def InsertPlayerKillLog(playerId: Long, killLog: Option[List[PlayerKillLog]]): Unit = {
+        val killLogClean = killLog.getOrElse(List[PlayerKillLog]())
+
+        killLogClean.map(kill => {
             val killLogInsert = quote(PlayerKillLogSchema.insert(lift(PlayerKillLogDao(
                 playerId,
                 kill.time,
@@ -161,8 +169,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerLanePosition(playerId: Long, lanePositions: Map[Index, Map[Index, Index]]): Unit = {
-        lanePositions.map(xPosition => {
+    def InsertPlayerLanePosition(playerId: Long, lanePositions: Option[Map[Index, Map[Index, Index]]]): Unit = {
+        val lanePositionsClean = lanePositions.getOrElse(Map[Index, Map[Index, Index]]())
+
+        lanePositionsClean.map(xPosition => {
             val x = xPosition._1
             val yPositions = xPosition._2
 
@@ -179,8 +189,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerDamage(playerId: Long, damages: Map[String, Int]): Unit ={
-        damages.map(damage => {
+    def InsertPlayerDamage(playerId: Long, damages: Option[Map[String, Int]]): Unit ={
+        val damageClean = damages.getOrElse(Map[String, Index]())
+
+        damageClean.map(damage => {
             val damageInsert = quote(PlayerDamageSchema.insert(lift(PlayerDamageDao(
                 playerId,
                 damage._1,
@@ -191,8 +203,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerDamageInflictor(playerId: Long, damageInflictors: Map[String, Int]): Unit = {
-        damageInflictors.map(damageInflictor => {
+    def InsertPlayerDamageInflictor(playerId: Long, damageInflictors: Option[Map[String, Int]]): Unit = {
+        val damageInflictorsClean = damageInflictors.getOrElse(Map[String, Int]())
+
+        damageInflictorsClean.map(damageInflictor => {
             val damageInsert = quote(PlayerDamageInflictorSchema.insert(lift(PlayerDamageInflictorDao(
                 playerId,
                 damageInflictor._1,
@@ -203,8 +217,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerDamageInflictorRecieved(playerId: Long, damageInflictorRecieved: Map[String, Int]): Unit = {
-        damageInflictorRecieved.map(recieved => {
+    def InsertPlayerDamageInflictorRecieved(playerId: Long, damageInflictorRecieved: Option[Map[String, Int]]): Unit = {
+        val damageInflictorRecievedClean = damageInflictorRecieved.getOrElse(Map[String, Int]())
+
+        damageInflictorRecievedClean.map(recieved => {
             val damageInsert = quote(PlayerDamageInflictorRecievedSchema.insert(lift(PlayerDamageInflictorRecievedDao(
                 playerId,
                 recieved._1,
@@ -215,8 +231,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerDamageTaken(playerId: Long, damageTaken: Map[String, Int]): Unit = {
-        damageTaken.map(damage => {
+    def InsertPlayerDamageTaken(playerId: Long, damageTaken: Option[Map[String, Int]]): Unit = {
+        val damageTakenClean = damageTaken.getOrElse(Map[String, Int]())
+
+        damageTakenClean.map(damage => {
             val damageInsert = quote(PlayerDamageTakenSchema.insert(lift(PlayerDamageTakenDao(
                 playerId,
                 damage._1,
@@ -227,8 +245,10 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerDamageTarget(playerId: Long, damageTargets: Map[String, Map[String, Int]]): Unit = {
-        damageTargets.map(damageTarget => {
+    def InsertPlayerDamageTarget(playerId: Long, damageTargets: Option[Map[String, Map[String, Int]]]): Unit = {
+        val damageTargetsClean = damageTargets.getOrElse(Map[String, Map[String, Int]]())
+
+        damageTargetsClean.map(damageTarget => {
             val source = damageTarget._1
             val targets = damageTarget._2
 
@@ -245,9 +265,11 @@ class PlayerHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <:
         })
     }
 
-    def InsertPlayerGoldTotal(playerId: Long, goldTotals: List[Int]): Unit = {
+    def InsertPlayerGoldTotal(playerId: Long, goldTotals: Option[List[Int]]): Unit = {
+        val goldTotalsClean = goldTotals.getOrElse(List[Int]())
+
         val goldInsert = quote {
-            liftQuery(goldTotals).foreach(value => PlayerGoldTotalSchema.insert(PlayerGoldTotalDao(
+            liftQuery(goldTotalsClean).foreach(value => PlayerGoldTotalSchema.insert(PlayerGoldTotalDao(
                 lift(playerId),
                 value
             )))

@@ -129,4 +129,8 @@ trait DaoSchema {
     val PlayerGoldTotalSchema = quote {
         querySchema[PlayerGoldTotalDao]("PlayerGoldTotal")
     }
+
+    val PremiumMatchSchema = quote {
+        querySchema[PremiumMatchDao]("PremiumMatch")
+    }
 }

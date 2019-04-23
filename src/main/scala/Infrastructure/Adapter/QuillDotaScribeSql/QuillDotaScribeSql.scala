@@ -1,5 +1,6 @@
 package Infrastructure.Adapter.QuillDotaScribeSql
 
+import Core.Application.Port.DatDota.Model.DatDotaMatch
 import Core.Application.Port.DotaScribeRepository.DotaScribeRepositoryPort
 import Core.Application.Port.OpenDota.Model._
 import Infrastructure.Adapter.QuillDotaScribeSql.DAO._
@@ -27,7 +28,6 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
 
         val response = mutable.MutableList[ProMatch]()
 
-
         joinData.foreach(row => {
             val test = row._2.isEmpty
             if (row._2.isEmpty) response += ProMatch(
@@ -45,6 +45,29 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
                 row._1.radiant_score,
                 row._1.dire_score,
                 row._1.radiant_win,
+            )
+        })
+
+        response.toList
+    }
+
+    override def GetPremiumMatchesWithoutMatchData(): List[DatDotaMatch] = {
+        val select = quote {
+            PremiumMatchSchema.leftJoin(MatchSchema).on((premiumGame, game) => premiumGame.match_id == game.match_id)
+        }
+
+        val joinData = Context.run(select)
+
+        val response = mutable.MutableList[DatDotaMatch]()
+
+        joinData.foreach(row => {
+            val test = row._2.isEmpty
+            if (row._2.isEmpty) response += DatDotaMatch(
+                row._1.match_id,
+                row._1.series_id,
+                row._1.startDate,
+                row._1.duration,
+                row._1.radiantVictory
             )
         })
 
@@ -121,6 +144,17 @@ class QuillDotaScribeSql(context: JdbcContext[_ >: SQLServerDialect with H2Diale
         Context.run(select.min)
     }
 
-    override def RebuildDbMappings(): Unit = ???
+    override def SavePremiumMatches(premiumMatches: List[DatDotaMatch]): Unit = {
+        val premiumMatchInsert = quote {
+            liftQuery(premiumMatches).foreach(matchData => PremiumMatchSchema.insert(PremiumMatchDao(
+                matchData.matchId,
+                matchData.seriesId,
+                matchData.startDate,
+                matchData.duration,
+                matchData.radiantVictory
+            )))
+        }
 
+        Context.run(premiumMatchInsert)
+    }
 }

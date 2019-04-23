@@ -1,9 +1,10 @@
 package Core.Application.AppService
 
+import Core.Application.Port.DatDota.DatDotaPort
 import Core.Application.Port.DotaScribeRepository.DotaScribeRepositoryPort
 import Core.Application.Port.OpenDota.OpenDotaPort
 
-class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepositoryPort) {
+class ProAppService(openDotaPort: OpenDotaPort, datDotaPort: DatDotaPort, repository: DotaScribeRepositoryPort) {
     def LoadProPlayerData(): Unit ={
         val proPlayers = openDotaPort.GetProPlayers()
         repository.SaveProPlayers(proPlayers)
@@ -33,6 +34,20 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
         })
     }
 
+    def CollectPremiumMatchesInDb(): Unit = {
+        val premiumMatches = repository.GetPremiumMatchesWithoutMatchData()
+
+        premiumMatches.map(preMatch => {
+            try {
+                println("Loading match data for matchId:" + preMatch.matchId)
+                val matchData = openDotaPort.GetMatch(preMatch.matchId)
+                repository.SaveMatch(matchData)
+            } catch {
+                case _ : Throwable => println("Error Decoding Match :" + preMatch.matchId)
+            }
+        })
+    }
+
     def LoadProMatchBatch(numBatches: Int) {
         for( i <- 0 until numBatches){
             val minMatchId = repository.GetMinProMatchId()
@@ -45,5 +60,10 @@ class ProAppService(openDotaPort: OpenDotaPort, repository: DotaScribeRepository
                 case _ : Throwable => println("error saving batch")
             }
         }
+    }
+
+    def CollectPremiumMatches(): Unit = {
+        val premiumMatches = datDotaPort.GetPremiumMatches()
+        repository.SavePremiumMatches(premiumMatches)
     }
 }

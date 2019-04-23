@@ -1,9 +1,9 @@
 package Core.Application.CommandHandler
 
-import Core.Application.AppService.{DotaScribeDbService, MatchAppService, ProAppService}
+import Core.Application.AppService.{MatchAppService, ProAppService}
 import Core.Application.Port.Cli.CliPort
 
-class CliCommandHandler(proAppService: ProAppService, dotaScribeDbService: DotaScribeDbService, matchAppService: MatchAppService) extends CliPort {
+class CliCommandHandler(proAppService: ProAppService, matchAppService: MatchAppService) extends CliPort {
     override def CollectProData(): Unit = {
         proAppService.LoadProPlayerData()
         proAppService.LoadProMatchData()
@@ -15,10 +15,6 @@ class CliCommandHandler(proAppService: ProAppService, dotaScribeDbService: DotaS
 
     override def CollectProPlayersFromOpenDota(): Unit = {
         proAppService.LoadProPlayerData()
-    }
-
-    override def RegenerateDbMappings(): Unit = {
-        dotaScribeDbService.RegenerateDbMappings()
     }
 
     override def CollectMatch(matchId: Long): Unit = {
@@ -35,5 +31,13 @@ class CliCommandHandler(proAppService: ProAppService, dotaScribeDbService: DotaS
 
     override def LoadProMatchBatch(numBatches: Int): Unit = {
         proAppService.LoadProMatchBatch(numBatches)
+    }
+
+    override def CollectPremiumMatches(): Unit = {
+        proAppService.CollectPremiumMatches()
+    }
+
+    override def CollectPremiumMatchesInDb(): Unit = {
+        proAppService.CollectPremiumMatchesInDb()
     }
 }

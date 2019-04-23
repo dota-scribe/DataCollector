@@ -23,7 +23,7 @@ case class MatchDao(
     start_time: Int,
     tower_status_dire: Int,
     tower_status_radiant: Int,
-    version: Int,
+    version: Option[Int],
     replay_salt: Int,
     series_id: Int,
     series_type: Int,

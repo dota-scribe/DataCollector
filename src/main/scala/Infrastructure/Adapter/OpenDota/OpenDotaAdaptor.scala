@@ -2,18 +2,15 @@ package Infrastructure.Adapter.OpenDota
 
 import Core.Application.Port.OpenDota.Model.{Chat, Match, ProMatch, ProPlayer}
 import Core.Application.Port.OpenDota.OpenDotaPort
-import scalaj.http._
 import io.circe.parser
 import io.circe.Error
 import io.circe.generic.semiauto.deriveDecoder
 import io.circe._
-import io.circe.parser._
 import io.circe.generic.auto._
 import io.circe.parser._
 
-import scala.io.Source
 
-class OpenDotaAdaptor(httpWorker: HttpWorkerTrait) extends OpenDotaPort {
+class OpenDotaAdaptor(httpWorker: OpenDotaHttpWorkerTrait) extends OpenDotaPort {
     override def GetProPlayers(): List[ProPlayer] = {
         val response = httpWorker.GetProPlayers()
 

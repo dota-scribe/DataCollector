@@ -1,9 +1,9 @@
 package Mocks
 
-import Infrastructure.Adapter.OpenDota.HttpWorkerTrait
+import Infrastructure.Adapter.OpenDota.OpenDotaHttpWorkerTrait
 import scala.io.Source
 
-class MockHttpWorker extends HttpWorkerTrait {
+class MockHttpWorker extends OpenDotaHttpWorkerTrait {
     override def GetProPlayers(): String = ???
 
     override def GetProMatches(): String = ???

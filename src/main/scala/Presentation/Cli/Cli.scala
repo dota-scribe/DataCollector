@@ -15,10 +15,10 @@ class Cli(cliPort: CliPort) {
         println("1: Collect Pro Matches and Players (OpenDota)")
         println("2: Collect Pro Matches (OpenDota)")
         println("3: Get Match (OpenDota)")
-        println("4: Get All Pro Matches in DB")
+        println("4: Sync ProMatch meta data")
         println("5: Load Pro Player Batches")
-        println("9: Regenerate DB Mappings")
-        println("")
+        println("6: Collect Premium Matches (DatDota)")
+        println("7: Sync Premium Match Data")
         print("> ")
 
         val selection = StdIn.readInt()
@@ -29,7 +29,8 @@ class Cli(cliPort: CliPort) {
             case 3 => GetMatch()
             case 4 => cliPort.CollectProMatchesInDb()
             case 5 => GetNumBatches()
-            case 9 => cliPort.RegenerateDbMappings()
+            case 6 => cliPort.CollectPremiumMatches()
+            case 7 => cliPort.CollectPremiumMatchesInDb()
         }
     }
 

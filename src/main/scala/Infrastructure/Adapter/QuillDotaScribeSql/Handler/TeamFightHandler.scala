@@ -10,8 +10,10 @@ class TeamFightHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect
     override val Context = context
     import Context._
 
-    def ProcessTeamFights(matchId: Long, teamfights: List[TeamFights]): Unit = {
-        teamfights.map(fight => {
+    def ProcessTeamFights(matchId: Long, teamfights: Option[List[TeamFights]]): Unit = {
+        val teamfight = teamfights.getOrElse(List[TeamFights]())
+
+        teamfight.map(fight => {
             val teamFightId = InsertTeamFight(matchId, fight)
             ProcessTeamFightPlayers(teamFightId, fight.players)
         })

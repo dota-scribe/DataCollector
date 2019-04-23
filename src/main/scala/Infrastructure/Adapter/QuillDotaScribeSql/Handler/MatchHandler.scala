@@ -53,8 +53,10 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
     }
 
     private def InsertRadiantXpAdvantage(matchData: Match): Unit = {
+        val xpAdvantage = matchData.radiant_xp_adv.getOrElse(List[Int]())
+
         val xpAdvantageInsert = quote {
-            liftQuery(matchData.radiant_xp_adv).foreach(adv => RadiantXpAdvantageSchema.insert(RadiantXpAdvantageDao(
+            liftQuery(xpAdvantage).foreach(adv => RadiantXpAdvantageSchema.insert(RadiantXpAdvantageDao(
                 lift(matchData.match_id),
                 adv
             )))
@@ -64,8 +66,10 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
     }
 
     private def InsertRadiantGoldAdvantage(matchData: Match): Unit = {
+        val goldAdvantage = matchData.radiant_gold_adv.getOrElse(List[Int]())
+
         val goldAdvantageInsert = quote {
-            liftQuery(matchData.radiant_gold_adv).foreach(adv => RadiantGoldAdvantageSchema.insert(RadiantGoldAdvantageDao(
+            liftQuery(goldAdvantage).foreach(adv => RadiantGoldAdvantageSchema.insert(RadiantGoldAdvantageDao(
                 lift(matchData.match_id),
                 adv
             )))
@@ -74,7 +78,9 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
         Context.run(goldAdvantageInsert)
     }
 
-    private def InsertObjective(matchId: Long, objectives: List[Objective]): Unit = {
+    private def InsertObjective(matchId: Long, objectiveOption: Option[List[Objective]]): Unit = {
+        val objectives = objectiveOption.getOrElse(List[Objective]())
+
         objectives.foreach{objective =>{
             val key: Option[String] = objective.key match {
                 case Some(key) => key.fold(l => Option(l), r => Option(r.toString))
@@ -112,8 +118,10 @@ class MatchHandler(context: JdbcContext[_ >: SQLServerDialect with H2Dialect <: 
     }
 
     private def InsertDraftTiming(matchData: Match): Unit = {
+        val draftTimings = matchData.draft_timings.getOrElse(List[DraftTiming]())
+
         val draftTimingInsert = quote {
-            liftQuery(matchData.draft_timings).foreach(timing => DraftTimingSchema.insert(DraftTimingDao(
+            liftQuery(draftTimings).foreach(timing => DraftTimingSchema.insert(DraftTimingDao(
                 lift(matchData.match_id),
                 timing.order,
                 timing.pick,

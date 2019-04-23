@@ -32,6 +32,7 @@ USE DotaScribe
 DROP TABLE IF EXISTS ProPlayer
 DROP TABLE IF EXISTS Chat
 DROP TABLE IF EXISTS ProMatch
+DROP TABLE IF EXISTS PremiumMatch
 DROP TABLE IF EXISTS DraftTiming
 DROP TABLE IF EXISTS PickBan
 DROP TABLE IF EXISTS RadiantGoldAdvantage
@@ -107,6 +108,16 @@ CREATE TABLE ProMatch (
 	PRIMARY KEY (match_id)
 )
 
+CREATE TABLE PremiumMatch (
+	match_id BIGINT NOT NULL,
+	series_Id BIGINT,
+	startDate BIGINT NOT NULL,
+	duration BIGINT NOT NULL,
+	radiantVictory BIT NOT NULL,
+
+	PRIMARY KEY (match_id)
+)
+
 CREATE TABLE Match (
 	match_id BIGINT NOT NULL,
 	barracks_status_dire INT NOT NULL,
@@ -130,7 +141,7 @@ CREATE TABLE Match (
 	start_time INT NOT NULL,
 	tower_status_dire INT NOT NULL,
 	tower_status_radiant INT NOT NULL,
-	version INT NOT NULL,
+	version INT,
 	replay_salt INT NOT NULL,
 	series_id INT NOT NULL,
 	series_type INT NOT NULL,
@@ -338,8 +349,8 @@ CREATE TABLE Player (
     party_size INT NOT NULL,
     performance_others VARCHAR(255),
     pings INT,
-    pred_vict BIT NOT NULL,
-    randomed BIT NOT NULL,
+    pred_vict BIT,
+    randomed BIT,
     repicked BIT,
     roshans_killed INT NOT NULL,
     rune_pickups INT NOT NULL,
